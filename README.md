@@ -5,6 +5,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 ## Features
 
 - Create and manage notes with title and body content
+- View detailed information for individual notes
 - Archive and unarchive notes for better organization
 - Search functionality for both active and archived notes
 - Responsive design for various screen sizes
@@ -37,6 +38,8 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 2. Click the "Add" button to create a new note
 
 ### Managing Notes
+
+- **View Details**: Click on a note's title to view its detailed information
 - **Archive**: Click the archive button on a note to move it to the archived section
 - **Unarchive**: Click the unarchive button on an archived note to restore it to active notes
 - **Delete**: Click the delete button to permanently remove a note
@@ -68,8 +71,10 @@ src/
 ## Technologies Used
 
 - **React 19** - UI library
+- **React Router DOM** - For routing and navigation
 - **Vite** - Build tool and development server
 - **PropTypes** - Runtime type checking for React props
+- **ESLint** - For code linting and maintaining code quality
 - **Clean Architecture** - For separation of concerns and maintainability
 
 ## Disclaimer

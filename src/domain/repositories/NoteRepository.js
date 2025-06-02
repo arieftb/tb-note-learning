@@ -88,4 +88,10 @@ export class NoteRepository {
   searchArchivedNotes (query) {
     return this.getArchivedNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
+
+  getNoteById (id) {
+    return this.notes.find(note => {
+      return note.id.toString() === id.toString();
+    }) || null;
+  }
 }
