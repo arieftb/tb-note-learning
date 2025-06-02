@@ -1,10 +1,13 @@
 import { Button } from '../atoms/Button';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export const NoteCard = ({ note, onDelete, onToggleArchive }) => {
   return (
     <div className="note-card slide-in">
-      <h3>{note.title}</h3>
+      <Link to={`/notes/${note.id}`} className="note-title-link">
+        <h3>{note.title}</h3>
+      </Link>
       <p>{note.body}</p>
       <div className="note-card-footer">
         <small className="text-light">

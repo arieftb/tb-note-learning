@@ -1,5 +1,51 @@
 /* Component styles */
 
+/* Note Detail */
+.note-detail {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-detail h2 {
+    margin-top: 0;
+    word-break: break-word;
+}
+
+.note-detail p {
+    line-height: 1.6;
+    word-break: break-word;
+}
+
+.note-detail-footer {
+    margin-top: 24px;
+}
+
+.note-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.note-title-link:hover h3 {
+    color: var(--color-secondary);
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--color-secondary);
+    color: white;
+    padding: 10px 16px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
 /* Note Card */
 .note-card {
   background-color: white;
@@ -69,7 +115,7 @@
 
 /* Form Elements */
 input, textarea, button {
-  font-family: var(--font-family);
+    font-family: var(--font-family), serif;
   font-size: var(--font-size-normal);
   padding: 10px 12px;
   border: 1px solid var(--color-border);
