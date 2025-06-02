@@ -150,3 +150,32 @@ button:disabled {
   background-color: #95a5a6;
   cursor: not-allowed;
 }
+
+/* Floating Button */
+.floating-button {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-secondary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    transition: background-color 0.2s, transform 0.2s;
+    z-index: 1000;
+}
+
+.floating-button:hover {
+    background-color: #2980b9;
+    transform: scale(1.05);
+}
+
+.plus-icon {
+    font-size: 30px;
+    font-weight: bold;
+}

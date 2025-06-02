@@ -1,7 +1,7 @@
 {
   "name": "tb-note",
   "private": true,
-  "version": "2.1.0-alpha",
+  "version": "2.1.0-alpha.1",
   "type": "module",
   "scripts": {
     "dev": "vite",

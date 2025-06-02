@@ -4,7 +4,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 
 ## Features
 
-- Create and manage notes with title and body content
+- Create notes with title and body content through a dedicated Add Note page
 - View detailed information for individual notes
 - Archive and unarchive notes for better organization
 - Search functionality for both active and archived notes
@@ -34,8 +34,10 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 ## Usage
 
 ### Adding a Note
-1. Fill in the title and body in the "Add New Note" section
-2. Click the "Add" button to create a new note
+
+1. Navigate to the Add Note page
+2. Fill in the title and body in the form
+3. Click the "Add" button to create a new note
 
 ### Managing Notes
 
