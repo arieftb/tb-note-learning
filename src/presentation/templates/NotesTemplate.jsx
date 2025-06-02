@@ -15,41 +15,38 @@ export const NotesLayout = ({
 }) => {
   return (
     <div className="container">
-      <header className="app-header mb-4">
-        <h1>TB Note</h1>
+      <section className="mb-5">
+        <h2 className="mb-3">Add New Note</h2>
+        <NoteForm onSubmit={onAddNote}/>
+      </section>
+
+      <section className="mb-4">
         <NoteSearch value={searchQuery} onChange={onSearchChange}/>
-      </header>
+      </section>
 
-      <main>
-        <section className="mb-5">
-          <h2 className="mb-3">Add New Note</h2>
-          <NoteForm onSubmit={onAddNote}/>
-        </section>
+      <section className="mb-5">
+        <h2 className="mb-3">Active Notes</h2>
+        <div className="notes-grid">
+          <NoteList
+            notes={activeNotes}
+            onDelete={onDeleteNote}
+            onToggleArchive={onToggleArchive}
+            emptyMessage="Tidak ada catatan aktif"
+          />
+        </div>
+      </section>
 
-        <section className="mb-5">
-          <h2 className="mb-3">Active Notes</h2>
-          <div className="notes-grid">
-            <NoteList
-              notes={activeNotes}
-              onDelete={onDeleteNote}
-              onToggleArchive={onToggleArchive}
-              emptyMessage="Tidak ada catatan aktif"
-            />
-          </div>
-        </section>
-
-        <section className="mb-5">
-          <h2 className="mb-3">Archived Notes</h2>
-          <div className="notes-grid">
-            <NoteList
-              notes={archivedNotes}
-              onDelete={onDeleteNote}
-              onToggleArchive={onToggleUnArchive}
-              emptyMessage="Tidak ada catatan terarsip"
-            />
-          </div>
-        </section>
-      </main>
+      <section className="mb-5">
+        <h2 className="mb-3">Archived Notes</h2>
+        <div className="notes-grid">
+          <NoteList
+            notes={archivedNotes}
+            onDelete={onDeleteNote}
+            onToggleArchive={onToggleUnArchive}
+            emptyMessage="Tidak ada catatan terarsip"
+          />
+        </div>
+      </section>
     </div>
   );
 };
