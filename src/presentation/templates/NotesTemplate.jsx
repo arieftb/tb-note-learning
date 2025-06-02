@@ -17,13 +17,16 @@ export const NotesLayout = ({
     <div className="container">
       <header className="app-header mb-4">
         <h1>TB Note</h1>
-        <NoteSearch value={searchQuery} onChange={onSearchChange}/>
       </header>
 
       <main>
         <section className="mb-5">
           <h2 className="mb-3">Add New Note</h2>
           <NoteForm onSubmit={onAddNote}/>
+        </section>
+
+        <section className="mb-4">
+          <NoteSearch value={searchQuery} onChange={onSearchChange}/>
         </section>
 
         <section className="mb-5">
