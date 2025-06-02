@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { NoteRepository } from '../../domain/repositories/NoteRepository';
 import { GetNoteByIdUseCase } from '../../domain/usecases/GetNoteByIdUseCase';
+import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 
-const noteRepository = new NoteRepository();
 const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository);
 
 export const DetailPage = () => {
