@@ -91,7 +91,7 @@ export class NoteRepository {
 
   getNoteById (id) {
     return this.notes.find(note => {
-      return note.id.toString() === id.toString();
+      return note.id === id;
     }) || null;
   }
 }

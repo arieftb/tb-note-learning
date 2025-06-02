@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { NotesLayout } from '../templates/NotesTemplate';
-import { NoteRepository } from '../../domain/repositories/noteRepository';
 import { GetArchiveNotesUseCase } from '../../domain/usecases/GetArchiveNotesUseCase.js';
 import { GetNotesUseCase } from '../../domain/usecases/GetNotesUseCase.js';
 import { SubmitNoteUseCase } from '../../domain/usecases/SubmitNoteUseCase.js';
@@ -9,8 +8,8 @@ import { SubmitArchiveNoteUseCase } from '../../domain/usecases/SubmitArchiveNot
 import { SubmitUnArchiveNoteUseCase } from '../../domain/usecases/SubmitUnArchiveNoteUseCase.js';
 import { SearchNotesUseCase } from '../../domain/usecases/SearchNotesUseCase.js';
 import { SearchArchiveNoteUseCase } from '../../domain/usecases/SearchArchiveNoteUseCase.js';
+import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 
-const noteRepository = new NoteRepository();
 const getNotesUseCase = new GetNotesUseCase(noteRepository);
 const getArchiveNotesUseCae = new GetArchiveNotesUseCase(noteRepository);
 const submitNoteUseCase = new SubmitNoteUseCase(noteRepository);
