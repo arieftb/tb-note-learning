@@ -1,0 +1,106 @@
+/* Component styles */
+
+/* Note Card */
+.note-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-card h3 {
+  margin-top: 0;
+  word-break: break-word;
+}
+
+.note-card p {
+  margin-bottom: 16px;
+  word-break: break-word;
+}
+
+.note-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note-card-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Note Form */
+.note-form {
+  background-color: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.note-form-group {
+  margin-bottom: 16px;
+}
+
+.char-limit {
+  display: block;
+  text-align: right;
+  margin-top: 4px;
+}
+
+/* Note Search */
+.note-search {
+  margin-bottom: 24px;
+}
+
+/* Note List */
+.note-list {
+  margin-bottom: 32px;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 24px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Elements */
+input, textarea, button {
+  font-family: var(--font-family);
+  font-size: var(--font-size-normal);
+  padding: 10px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+button {
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2980b9;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
