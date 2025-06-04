@@ -26,6 +26,12 @@ export const NoteCard = ({ note, onToggleArchive }) => {
 };
 
 NoteCard.propTypes = {
-  note: PropTypes.object.isRequired,
+  note: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    archived: PropTypes.bool.isRequired
+  }).isRequired,
   onToggleArchive: PropTypes.func.isRequired
 };

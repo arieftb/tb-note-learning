@@ -35,7 +35,15 @@ export const NotesLayout = ({
 };
 
 NotesLayout.propTypes = {
-  activeNotes: PropTypes.array.isRequired,
+  activeNotes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      archived: PropTypes.bool.isRequired
+    })
+  ).isRequired,
   searchQuery: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   onToggleArchive: PropTypes.func.isRequired,

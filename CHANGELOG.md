@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0-alpha.6] - 2025-06-05
+
+### Changed
+
+- Enhanced PropTypes validation across components with detailed shape definitions
+- Added documentation for callback parameter shapes
+- Improved type checking for note objects in all components
+
 ## [2.1.0-alpha.5] - 2025-06-04
 
 ### Added

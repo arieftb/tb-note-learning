@@ -34,7 +34,15 @@ export const ArchivedNotesLayout = ({
 };
 
 ArchivedNotesLayout.propTypes = {
-  archivedNotes: PropTypes.array.isRequired,
+  archivedNotes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      archived: PropTypes.bool.isRequired
+    })
+  ).isRequired,
   searchQuery: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   onToggleUnArchive: PropTypes.func.isRequired,

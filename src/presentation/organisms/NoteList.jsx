@@ -20,7 +20,15 @@ export const NoteList = ({ notes, onToggleArchive, emptyMessage = 'Tidak ada cat
 };
 
 NoteList.propTypes = {
-  notes: PropTypes.array.isRequired,
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      archived: PropTypes.bool.isRequired
+    })
+  ).isRequired,
   onToggleArchive: PropTypes.func.isRequired,
   emptyMessage: PropTypes.string
 };

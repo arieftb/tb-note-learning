@@ -55,3 +55,10 @@ export const NoteForm = ({ onSubmit }) => {
 NoteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
+
+// Additional PropType documentation for the onSubmit callback
+// The onSubmit function will receive an object with the following shape:
+// {
+//   title: string,
+//   body: string
+// }
