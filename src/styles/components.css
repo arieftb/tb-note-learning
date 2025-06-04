@@ -23,6 +23,12 @@
     margin-top: 24px;
 }
 
+.note-detail-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
 .note-title-link {
     text-decoration: none;
     color: inherit;

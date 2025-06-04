@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { NotesLayout } from '../templates/NotesTemplate';
 import { GetArchiveNotesUseCase } from '../../domain/usecases/GetArchiveNotesUseCase.js';
 import { GetNotesUseCase } from '../../domain/usecases/GetNotesUseCase.js';
-import { DeleteNoteUseCase } from '../../domain/usecases/DeleteNoteUseCase.js';
 import { SubmitArchiveNoteUseCase } from '../../domain/usecases/SubmitArchiveNoteUseCase.js';
 import { SubmitUnArchiveNoteUseCase } from '../../domain/usecases/SubmitUnArchiveNoteUseCase.js';
 import { SearchNotesUseCase } from '../../domain/usecases/SearchNotesUseCase.js';
@@ -11,7 +10,6 @@ import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 
 const getNotesUseCase = new GetNotesUseCase(noteRepository);
 const getArchiveNotesUseCae = new GetArchiveNotesUseCase(noteRepository);
-const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository);
 const submitArchiveNoteUseCase = new SubmitArchiveNoteUseCase(noteRepository);
 const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository);
 const searchNotesUseCase = new SearchNotesUseCase(noteRepository);
@@ -44,10 +42,6 @@ export const NotesPage = () => {
   };
 
 
-  const handleDeleteNote = (id) => {
-    deleteNoteUseCase.execute(id);
-    loadNotes();
-  };
 
   const handleToggleArchive = (id) => {
     submitArchiveNoteUseCase.execute(id);
@@ -70,7 +64,6 @@ export const NotesPage = () => {
       archivedNotes={archivedNotes}
       searchQuery={searchQuery}
       onSearchChange={handleSearchChange}
-      onDeleteNote={handleDeleteNote}
       onToggleArchive={handleToggleArchive}
       onToggleUnArchive={handleToggleUnArchive}
     />

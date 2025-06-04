@@ -28,13 +28,13 @@
   .container {
     padding: 0 var(--spacing-lg);
   }
-  
+
   .notes-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
   }
-  
-  .note-form {
+
+    .note-form {
     padding: var(--spacing-lg);
   }
 }
@@ -44,14 +44,14 @@
   .notes-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
-  .app-header {
+
+    .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  
-  .note-search {
+
+    .note-search {
     width: 40%;
   }
 }
@@ -68,13 +68,14 @@
   input, textarea, button {
     width: 100%;
   }
-  
-  .note-card-footer {
+
+    .note-card-footer {
     flex-direction: column;
     align-items: flex-start;
   }
-  
-  .note-card-actions {
+
+    .note-card-actions,
+    .note-detail-actions {
     margin-top: var(--spacing-sm);
     width: 100%;
     justify-content: space-between;
