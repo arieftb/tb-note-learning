@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import { NotesPage } from './presentation/pages/NotesPage';
 import { DetailPage } from './presentation/pages/DetailPage';
+import { NewNotePage } from './presentation/pages/NewNotePage';
 
 function App () {
   return (
@@ -11,6 +12,7 @@ function App () {
       <main>
         <Routes>
           <Route path="/" element={<NotesPage/>}/>
+          <Route path="/notes/new" element={<NewNotePage/>}/>
           <Route path="/notes/:id" element={<DetailPage/>}/>
         </Routes>
       </main>

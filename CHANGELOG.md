@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0-alpha.1] - 2025-06-03
+
+### Changed
+
+- Move the Add New Note section from the Home Page to a new specific page
+
 ## [2.1.0-alpha] - 2025-06-02
 
 ### Added
