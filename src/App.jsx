@@ -3,6 +3,7 @@ import { NotesPage } from './presentation/pages/NotesPage';
 import { DetailPage } from './presentation/pages/DetailPage';
 import { NewNotePage } from './presentation/pages/NewNotePage';
 import { ArchivedNotesPage } from './presentation/pages/ArchivedNotesPage';
+import { NotFoundPage } from './presentation/pages/NotFoundPage';
 import { Navigation } from './presentation/molecules/Navigation';
 
 function App () {
@@ -20,6 +21,7 @@ function App () {
           <Route path="/notes/new" element={<NewNotePage/>}/>
           <Route path="/notes/:id" element={<DetailPage/>}/>
           <Route path="/archived" element={<ArchivedNotesPage/>}/>
+          <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </main>
     </>
