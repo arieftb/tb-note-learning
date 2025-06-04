@@ -227,3 +227,30 @@ button:disabled {
     font-size: 30px;
     font-weight: bold;
 }
+
+/* Not Found Page */
+.not-found-page {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.not-found-page h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 16px;
+}
+
+.not-found-page p {
+    font-size: 1.2rem;
+    margin-bottom: 24px;
+    color: var(--color-text-light);
+}
+
+.not-found-page .button {
+    margin-top: 16px;
+}

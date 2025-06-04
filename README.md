@@ -10,6 +10,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 - Dedicated page for archived notes for better separation of concerns
 - Improved navigation between different sections of the application
 - Enhanced search functionality with URL-based parameters and persistent search state
+- 404 Not Found page for better error handling of undefined routes
 - Responsive design for various screen sizes
 - Clean architecture implementation with separation of concerns
 
