@@ -1,7 +1,7 @@
 import { NoteCard } from '../molecules/NoteCard';
 import PropTypes from 'prop-types';
 
-export const NoteList = ({ notes, onDelete, onToggleArchive, emptyMessage = 'Tidak ada catatan' }) => {
+export const NoteList = ({ notes, onToggleArchive, emptyMessage = 'Tidak ada catatan' }) => {
   if (notes.length === 0) {
     return <p className="empty-message">{emptyMessage}</p>;
   }
@@ -12,7 +12,6 @@ export const NoteList = ({ notes, onDelete, onToggleArchive, emptyMessage = 'Tid
         <NoteCard
           key={note.id}
           note={note}
-          onDelete={onDelete}
           onToggleArchive={onToggleArchive}
         />
       ))}
@@ -22,7 +21,6 @@ export const NoteList = ({ notes, onDelete, onToggleArchive, emptyMessage = 'Tid
 
 NoteList.propTypes = {
   notes: PropTypes.array.isRequired,
-  onDelete: PropTypes.func.isRequired,
   onToggleArchive: PropTypes.func.isRequired,
   emptyMessage: PropTypes.string
 };

@@ -8,7 +8,6 @@ export const NotesLayout = ({
   archivedNotes,
   searchQuery,
   onSearchChange,
-  onDeleteNote,
   onToggleArchive,
   onToggleUnArchive,
 }) => {
@@ -23,7 +22,6 @@ export const NotesLayout = ({
         <div className="notes-grid">
           <NoteList
             notes={activeNotes}
-            onDelete={onDeleteNote}
             onToggleArchive={onToggleArchive}
             emptyMessage="Tidak ada catatan aktif"
           />
@@ -35,7 +33,6 @@ export const NotesLayout = ({
         <div className="notes-grid">
           <NoteList
             notes={archivedNotes}
-            onDelete={onDeleteNote}
             onToggleArchive={onToggleUnArchive}
             emptyMessage="Tidak ada catatan terarsip"
           />
@@ -54,7 +51,6 @@ NotesLayout.propTypes = {
   archivedNotes: PropTypes.array.isRequired,
   searchQuery: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
-  onDeleteNote: PropTypes.func.isRequired,
   onToggleArchive: PropTypes.func.isRequired,
   onToggleUnArchive: PropTypes.func.isRequired,
 };

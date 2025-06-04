@@ -2,7 +2,7 @@ import { Button } from '../atoms/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export const NoteCard = ({ note, onDelete, onToggleArchive }) => {
+export const NoteCard = ({ note, onToggleArchive }) => {
   return (
     <div className="note-card slide-in">
       <Link to={`/notes/${note.id}`} className="note-title-link">
@@ -19,11 +19,6 @@ export const NoteCard = ({ note, onDelete, onToggleArchive }) => {
           >
             {note.archived ? 'Aktifkan' : 'Arsipkan'}
           </Button>
-          <Button
-            onClick={() => onDelete(note.id)}
-          >
-            Hapus
-          </Button>
         </div>
       </div>
     </div>
@@ -32,6 +27,5 @@ export const NoteCard = ({ note, onDelete, onToggleArchive }) => {
 
 NoteCard.propTypes = {
   note: PropTypes.object.isRequired,
-  onDelete: PropTypes.func.isRequired,
   onToggleArchive: PropTypes.func.isRequired
 };

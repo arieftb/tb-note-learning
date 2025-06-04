@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { GetNoteByIdUseCase } from '../../domain/usecases/GetNoteByIdUseCase';
+import { DeleteNoteUseCase } from '../../domain/usecases/DeleteNoteUseCase';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
+import { Button } from '../atoms/Button';
 
 const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository);
+const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository);
 
 export const DetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [note, setNote] = useState(null);
 
   useEffect(() => {
@@ -17,6 +21,11 @@ export const DetailPage = () => {
 
     fetchNote();
   }, [id]);
+
+  const handleDeleteNote = () => {
+    deleteNoteUseCase.execute(id);
+    navigate('/');
+  };
 
   if (!note) {
     return (
@@ -34,6 +43,11 @@ export const DetailPage = () => {
           {new Date(note.createdAt).toLocaleDateString()}
         </small>
         <p className="mb-4">{note.body}</p>
+        <div className="note-detail-actions">
+          <Button onClick={handleDeleteNote}>
+            Hapus
+          </Button>
+        </div>
       </div>
     </div>
   );

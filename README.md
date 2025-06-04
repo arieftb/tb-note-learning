@@ -15,7 +15,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/tb-note.git
+   git clone https://github.com/arieftb/tb-note-learning.git
    cd tb-note
    ```
 
@@ -44,7 +44,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 - **View Details**: Click on a note's title to view its detailed information
 - **Archive**: Click the archive button on a note to move it to the archived section
 - **Unarchive**: Click the unarchive button on an archived note to restore it to active notes
-- **Delete**: Click the delete button to permanently remove a note
+- **Delete**: Available on the note detail page, click the delete button to permanently remove a note
 
 ### Searching Notes
 Use the search bar at the top of the page to filter both active and archived notes based on keywords.
@@ -73,7 +73,7 @@ src/
 ## Technologies Used
 
 - **React 19** - UI library
-- **React Router DOM** - For routing and navigation
+- **React Router DOM 7.6.1** - For routing and navigation
 - **Vite** - Build tool and development server
 - **PropTypes** - Runtime type checking for React props
 - **ESLint** - For code linting and maintaining code quality

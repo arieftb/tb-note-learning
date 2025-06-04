@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0-alpha.2] - 2025-06-04
+
+### Changed
+
+- Moved delete functionality from note cards to the detail page
+- Improved UI for note actions with consistent styling
+- Enhanced responsive design for note action buttons
+
 ## [2.1.0-alpha.1] - 2025-06-03
 
 ### Changed
