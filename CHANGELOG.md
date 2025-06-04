@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0-alpha.4] - 2025-06-04
+
+### Changed
+
+- Improved search functionality with URL-based search parameters
+- Implemented React Router's useSearchParams hook for persistent search queries
+- Enhanced user experience by maintaining search state during navigation
+- Updated search handling in both active and archived notes pages
+
 ## [2.1.0-alpha.3] - 2025-06-04
 
 ### Added

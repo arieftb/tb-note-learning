@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { ArchivedNotesLayout } from '../templates/ArchivedNotesTemplate';
 import { GetArchiveNotesUseCase } from '../../domain/usecases/GetArchiveNotesUseCase.js';
 import { SubmitUnArchiveNoteUseCase } from '../../domain/usecases/SubmitUnArchiveNoteUseCase.js';
@@ -11,11 +12,12 @@ const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository);
 
 export const ArchivedNotesPage = () => {
   const [archivedNotes, setArchivedNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('keyword') || '';
 
   useEffect(() => {
-    loadArchivedNotes();
-  }, []);
+    loadArchivedNotes(searchQuery);
+  }, [searchQuery]);
 
   const loadArchivedNotes = (keyword) => {
     if (keyword) {
@@ -30,12 +32,15 @@ export const ArchivedNotesPage = () => {
 
   const handleToggleUnArchive = (id) => {
     submitUnArchiveNoteUseCase.execute(id);
-    loadArchivedNotes();
+    loadArchivedNotes(searchQuery);
   };
 
   const handleSearchChange = (keyword) => {
-    setSearchQuery(keyword);
-    loadArchivedNotes(keyword);
+    if (keyword) {
+      setSearchParams({ keyword });
+    } else {
+      setSearchParams({});
+    }
   };
 
   return (
