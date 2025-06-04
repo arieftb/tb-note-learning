@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0-alpha.3] - 2025-06-04
+
+### Added
+
+- Added a dedicated ArchivedNotesPage for better separation of concerns
+- Implemented Navigation component for improved user navigation
+
+### Changed
+
+- Moved archived notes functionality to a separate page
+- Simplified NotesPage to focus only on active notes
+
 ## [2.1.0-alpha.2] - 2025-06-04
 
 ### Changed

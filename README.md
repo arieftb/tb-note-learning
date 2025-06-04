@@ -7,6 +7,8 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 - Create notes with title and body content through a dedicated Add Note page
 - View detailed information for individual notes
 - Archive and unarchive notes for better organization
+- Dedicated page for archived notes for better separation of concerns
+- Improved navigation between different sections of the application
 - Search functionality for both active and archived notes
 - Responsive design for various screen sizes
 - Clean architecture implementation with separation of concerns
@@ -16,7 +18,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 1. Clone the repository:
    ```bash
    git clone https://github.com/arieftb/tb-note-learning.git
-   cd tb-note
+   cd tb-note-learning
    ```
 
 2. Install dependencies:
@@ -42,9 +44,10 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 ### Managing Notes
 
 - **View Details**: Click on a note's title to view its detailed information
-- **Archive**: Click the archive button on a note to move it to the archived section
+- **Archive**: Click the archive button on a note to move it to the archived notes page
 - **Unarchive**: Click the unarchive button on an archived note to restore it to active notes
 - **Delete**: Available on the note detail page, click the delete button to permanently remove a note
+- **Navigate**: Use the navigation component to switch between active notes, archived notes, and adding new notes
 
 ### Searching Notes
 Use the search bar at the top of the page to filter both active and archived notes based on keywords.

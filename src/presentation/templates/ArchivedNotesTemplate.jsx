@@ -3,11 +3,11 @@ import { NoteList } from '../organisms/NoteList';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export const NotesLayout = ({
-  activeNotes,
+export const ArchivedNotesLayout = ({
+  archivedNotes,
   searchQuery,
   onSearchChange,
-  onToggleArchive,
+  onToggleUnArchive,
 }) => {
   return (
     <div className="container">
@@ -16,16 +16,15 @@ export const NotesLayout = ({
       </section>
 
       <section className="mb-5">
-        <h2 className="mb-3">Active Notes</h2>
+        <h2 className="mb-3">Archived Notes</h2>
         <div className="notes-grid">
           <NoteList
-            notes={activeNotes}
-            onToggleArchive={onToggleArchive}
-            emptyMessage="Tidak ada catatan aktif"
+            notes={archivedNotes}
+            onToggleArchive={onToggleUnArchive}
+            emptyMessage="Tidak ada catatan terarsip"
           />
         </div>
       </section>
-
 
       <Link to="/notes/new" className="floating-button">
         <span className="plus-icon">+</span>
@@ -34,9 +33,9 @@ export const NotesLayout = ({
   );
 };
 
-NotesLayout.propTypes = {
-  activeNotes: PropTypes.array.isRequired,
+ArchivedNotesLayout.propTypes = {
+  archivedNotes: PropTypes.array.isRequired,
   searchQuery: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
-  onToggleArchive: PropTypes.func.isRequired,
+  onToggleUnArchive: PropTypes.func.isRequired,
 };
