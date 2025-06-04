@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { NotesLayout } from '../templates/NotesTemplate';
 import { GetNotesUseCase } from '../../domain/usecases/GetNotesUseCase.js';
 import { SubmitArchiveNoteUseCase } from '../../domain/usecases/SubmitArchiveNoteUseCase.js';
@@ -11,11 +12,12 @@ const searchNotesUseCase = new SearchNotesUseCase(noteRepository);
 
 export const NotesPage = () => {
   const [activeNotes, setActiveNotes] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get('keyword') || '';
 
   useEffect(() => {
-    loadNotes();
-  }, []);
+    loadNotes(searchQuery);
+  }, [searchQuery]);
 
   const loadNotes = (keyword) => {
     if (keyword) {
@@ -30,12 +32,15 @@ export const NotesPage = () => {
 
   const handleToggleArchive = (id) => {
     submitArchiveNoteUseCase.execute(id);
-    loadNotes();
+    loadNotes(searchQuery);
   };
 
   const handleSearchChange = (keyword) => {
-    setSearchQuery(keyword);
-    loadNotes(keyword);
+    if (keyword) {
+      setSearchParams({ keyword });
+    } else {
+      setSearchParams({});
+    }
   };
 
   return (

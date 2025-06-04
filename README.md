@@ -9,7 +9,7 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 - Archive and unarchive notes for better organization
 - Dedicated page for archived notes for better separation of concerns
 - Improved navigation between different sections of the application
-- Search functionality for both active and archived notes
+- Enhanced search functionality with URL-based parameters and persistent search state
 - Responsive design for various screen sizes
 - Clean architecture implementation with separation of concerns
 
@@ -50,7 +50,14 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 - **Navigate**: Use the navigation component to switch between active notes, archived notes, and adding new notes
 
 ### Searching Notes
-Use the search bar at the top of the page to filter both active and archived notes based on keywords.
+
+Use the search bar at the top of the page to filter both active and archived notes based on keywords. The search
+functionality features:
+
+- **Persistent Search**: Search queries are preserved in the URL, allowing you to share search results or navigate back
+  to previous searches
+- **Maintained State**: Search state is maintained during navigation between pages
+- **Consistent Experience**: The same search behavior works across both active and archived notes pages
 
 ## Project Structure
 
