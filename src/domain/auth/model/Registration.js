@@ -4,6 +4,22 @@ import { Password } from './Password.js';
 
 export class Registration {
   constructor (name, email, password) {
+    this.validate(
+      name,
+      email,
+      password,
+    );
+
+    this.email = email;
+    this.password = password;
+    this.name = name;
+  }
+
+  validate (
+    name,
+    email,
+    password,
+  ) {
     if (!(name instanceof Name)) {
       throw new Error('Name must be an instance of Name');
     }
@@ -15,10 +31,6 @@ export class Registration {
     if (!(password instanceof Password)) {
       throw new Error('Password must be an instance of Password');
     }
-
-    this.email = email;
-    this.password = password;
-    this.name = name;
   }
 
   getName () {
