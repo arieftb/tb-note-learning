@@ -4,6 +4,36 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.1.0] - 2025-06-21
+
+### Added
+
+- Added a 404 Not Found page for better error handling
+- Implemented wildcard route to catch all undefined routes
+- Added styling for the Not Found page with consistent design
+- Added a dedicated ArchivedNotesPage for better separation of concerns
+- Implemented Navigation component for improved user navigation
+
+### Changed
+
+- Enhanced PropTypes validation across components with detailed shape definitions
+- Added documentation for callback parameter shapes
+- Improved type checking for note objects in all components
+- Improved search functionality with URL-based search parameters
+- Implemented React Router's useSearchParams hook for persistent search queries
+- Enhanced user experience by maintaining search state during navigation
+- Updated search handling in both active and archived notes pages
+- Moved archived notes functionality to a separate page
+- Simplified NotesPage to focus only on active notes
+- Moved delete functionality from note cards to the detail page
+- Improved UI for note actions with consistent styling
+- Enhanced responsive design for note action buttons
+- Move the Add New Note section from the Home Page to a new specific page
+- Implemented a singleton pattern for NoteRepository with new NoteRepositoryInstance
+- Changed note IDs from numeric to string format (e.g., 'notes-1' instead of 1)
+- Simplified ID comparison in getNoteById method
+- Refactored components to use the singleton NoteRepository instance
+
 ## [2.1.0-alpha.6] - 2025-06-05
 
 ### Changed
