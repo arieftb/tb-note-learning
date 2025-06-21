@@ -255,20 +255,20 @@ button:disabled {
     margin-top: 16px;
 }
 
-/* Register Page */
-.register-page {
+/* Register Page and Login Page */
+.register-page, .login-page {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
 }
 
-.register-page h2 {
+.register-page h2, .login-page h2 {
     text-align: center;
     margin-bottom: 24px;
     color: var(--color-primary);
 }
 
-.register-form {
+.register-form, .login-form {
     background-color: white;
     border-radius: 8px;
     padding: 24px;
@@ -297,7 +297,7 @@ button:disabled {
     font-size: 0.8rem;
 }
 
-.register-button {
+.register-button, .login-button {
     width: 100%;
     padding: 12px;
     margin-top: 8px;
@@ -322,18 +322,18 @@ button:disabled {
     border-left: 4px solid #27ae60;
 }
 
-.login-link {
+.login-link, .register-link {
     text-align: center;
     margin-top: 16px;
     color: var(--color-text-light);
 }
 
-.login-link a {
+.login-link a, .register-link a {
     color: var(--color-secondary);
     text-decoration: none;
     font-weight: bold;
 }
 
-.login-link a:hover {
+.login-link a:hover, .register-link a:hover {
     text-decoration: underline;
 }

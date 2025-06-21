@@ -12,11 +12,28 @@ async function register ({ name, email, password }) {
   const responseJson = await response.json();
 
   if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    return { error: responseJson.message };
   }
 
   return { error: false };
 }
 
-export { register };
+async function login ({ email, password }) {
+  const response = await fetch(`${BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ email, password }),
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: responseJson.message, data: null };
+  }
+
+  return { error: false, data: { accessToken: responseJson.data.accessToken } };
+}
+
+export { register, login };

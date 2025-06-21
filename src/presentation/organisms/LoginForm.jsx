@@ -4,31 +4,20 @@ import { FormGroup } from '../molecules/FormGroup';
 import { Button } from '../atoms/Button';
 import { ErrorMessage } from '../atoms/ErrorMessage';
 
-export const RegisterForm = ({
-  name,
+export const LoginForm = ({
   email,
   password,
-  passwordConfirmation,
-  onNameChange,
   onEmailChange,
   onPasswordChange,
-  onPasswordConfirmationChange,
   onSubmit,
   isLoading,
   generalError,
-  className = 'register-form'
+  className = 'login-form'
 }) => {
   return (
     <div className={className}>
       <ErrorMessage message={generalError}/>
       <form onSubmit={onSubmit}>
-        <FormGroup
-          id="name"
-          label="Name"
-          value={name}
-          onChange={onNameChange}
-          required
-        />
         <FormGroup
           id="email"
           label="Email"
@@ -48,49 +37,34 @@ export const RegisterForm = ({
         >
           <small>Password must be at least 6 characters long</small>
         </FormGroup>
-        <FormGroup
-          id="passwordConfirmation"
-          label="Confirm Password"
-          type="password"
-          value={passwordConfirmation}
-          onChange={onPasswordConfirmationChange}
-          required
-          minLength={6}
-        >
-          <small>Please confirm your password</small>
-        </FormGroup>
         <Button
           type="submit"
-          className="register-button"
+          className="login-button"
           disabled={isLoading}
         >
-          {isLoading ? 'Registering...' : 'Register'}
+          {isLoading ? 'Logging in...' : 'Login'}
         </Button>
       </form>
-      <p className="login-link">
-        Already have an account? <a href="/login">Login</a>
+      <p className="register-link">
+        Don't have an account? <a href="/register">Register</a>
       </p>
     </div>
   );
 };
 
-RegisterForm.propTypes = {
-  name: PropTypes.string.isRequired,
+LoginForm.propTypes = {
   email: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired,
-  passwordConfirmation: PropTypes.string.isRequired,
-  onNameChange: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
-  onPasswordConfirmationChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   generalError: PropTypes.string,
   className: PropTypes.string
 };
 
-RegisterForm.defaultProps = {
+LoginForm.defaultProps = {
   isLoading: false,
   generalError: '',
-  className: 'register-form'
+  className: 'login-form'
 };

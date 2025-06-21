@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Name } from '../../domain/auth/model/Name';
 import { Email } from '../../domain/auth/model/Email';
 import { Password } from '../../domain/auth/model/Password';
@@ -9,6 +10,7 @@ import { RegisterForm } from '../organisms/RegisterForm';
 import { SuccessMessage } from '../atoms/SuccessMessage';
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,12 +61,19 @@ export const RegisterPage = () => {
       const result = await registerUseCase.execute(registration);
 
       if (!result.error) {
-        setSuccessMessage('Registration successful! You can now log in with your credentials.');
+        setSuccessMessage('Registration successful! You will be redirected to the login page in 3 seconds.');
         // Clear form fields after successful registration
         setName('');
         setEmail('');
         setPassword('');
         setPasswordConfirmation('');
+
+        // Navigate to login page after 3 seconds
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
+      } else {
+        setErrors({ general: result.error });
       }
     } catch (error) {
       setErrors({ general: error.message });
