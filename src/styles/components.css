@@ -254,3 +254,86 @@ button:disabled {
 .not-found-page .button {
     margin-top: 16px;
 }
+
+/* Register Page */
+.register-page {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.register-page h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--color-primary);
+}
+
+.register-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+}
+
+.register-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+.error-message {
+    background-color: #ffecec;
+    color: #e74c3c;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    border-left: 4px solid #e74c3c;
+}
+
+.success-message {
+    background-color: #e7f9e7;
+    color: #27ae60;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    border-left: 4px solid #27ae60;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--color-text-light);
+}
+
+.login-link a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
