@@ -8,10 +8,9 @@ import { RegisterPage } from './presentation/pages/RegisterPage';
 import { LoginPage } from './presentation/pages/LoginPage';
 import { Header } from './presentation/organisms/Header';
 import { LogoutUseCase } from './domain/auth/usecases/LogoutUseCase.js';
-import { AuthRepository } from './domain/auth/repositories/AuthRepository.js';
+import authRepositoryInstance from './domain/auth/repositories/AuthRepositoryInstance.js';
 
-const authRepository = new AuthRepository();
-const logoutUseCase = new LogoutUseCase(authRepository);
+const logoutUseCase = new LogoutUseCase(authRepositoryInstance);
 
 function App () {
   const location = useLocation();
