@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Navigation } from '../molecules/Navigation.jsx';
 
-export const Header = ({ currentPath }) => {
+export const Header = ({ currentPath, onLogoutClick }) => {
   const isRegisterPage = currentPath === '/register';
   const isLoginPage = currentPath === '/login';
 
@@ -12,6 +12,8 @@ export const Header = ({ currentPath }) => {
       {!isRegisterPage && !isLoginPage && (
         <Navigation currentPath={
           currentPath
+        } onLogoutClick={
+          onLogoutClick
         }/>
       )}
     </header>
@@ -20,4 +22,5 @@ export const Header = ({ currentPath }) => {
 
 Header.propTypes = {
   currentPath: PropTypes.string.isRequired,
+  onLogoutClick: PropTypes.func.isRequired
 };

@@ -1,5 +1,5 @@
 import { login, register } from '../../../data/auth/infrastructure/AuthRemoteService.js';
-import { getToken, saveToken } from '../../../data/auth/persistence/AuthLocalService.js';
+import { getToken, removeToken, saveToken } from '../../../data/auth/persistence/AuthLocalService.js';
 
 export class AuthRepository {
   async register (registration) {
@@ -23,5 +23,9 @@ export class AuthRepository {
 
   async saveToken (token) {
     return saveToken(token);
+  }
+
+  async logout () {
+    return removeToken();
   }
 }

@@ -4,9 +4,10 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export const Navigation = ({ currentPath }) => {
+export const Navigation = ({ currentPath, onLogoutClick }) => {
   const isActivePage = currentPath === '/';
   const isArchivedPage = currentPath === '/archived';
+  const isAddNewPage = currentPath === '/notes/new';
 
   return (
     <nav className="navigation">
@@ -25,6 +26,18 @@ export const Navigation = ({ currentPath }) => {
             </li>
           )
         }
+        {
+          (isAddNewPage || isActivePage || isArchivedPage) && (
+            <li>
+              <button
+                onClick={onLogoutClick}
+                className="nav-link-button"
+              >
+                Logout
+              </button>
+            </li>
+          )
+        }
       </ul>
     </nav>
   );
@@ -32,4 +45,5 @@ export const Navigation = ({ currentPath }) => {
 
 Navigation.propTypes = {
   currentPath: PropTypes.string.isRequired,
+  onLogoutClick: PropTypes.func.isRequired
 };

@@ -4,11 +4,16 @@ async function saveToken (
   localStorage.setItem('token', token);
 }
 
+async function removeToken () {
+  localStorage.removeItem('token');
+}
+
 async function getToken () {
   return localStorage.getItem('token');
 }
 
 export {
   saveToken,
-  getToken
+  getToken,
+  removeToken
 };
