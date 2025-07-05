@@ -1,4 +1,5 @@
 import { getInitialData } from '../../data/source/NoteSource.js';
+import { fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
@@ -53,18 +54,16 @@ export class NoteRepository {
     return null;
   }
 
-  getNotes () {
-    return this.notes
+  async getNotes (token) {
+    const response = await fetchCollection(token);
+    const { data } = await response.json();
+
+    return data
       .filter(note => !note.archived)
+      .map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }))
       .sort((a, b) => {
-        const dateA = new Date(a.createdAt).getTime();
-        const dateB = new Date(b.createdAt).getTime();
-
-        if (dateA !== dateB) {
-          return dateB - dateA;
-        }
-
-        return a.title.localeCompare(b.title);
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        return dateDiff !== 0 ? dateDiff : a.title.localeCompare(b.title);
       });
   }
 

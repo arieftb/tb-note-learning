@@ -22,6 +22,10 @@ export class AuthRepository {
     return typeof token === 'string' && token.trim().length > 0;
   }
 
+  async getToken () {
+    return getToken();
+  }
+
   async saveToken (token) {
     return saveToken(token);
   }
