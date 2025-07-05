@@ -18,7 +18,8 @@ export class AuthRepository {
   }
 
   async getAuthStatus () {
-    return await getToken() !== '';
+    const token = await getToken();
+    return typeof token === 'string' && token.trim().length > 0;
   }
 
   async saveToken (token) {

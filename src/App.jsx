@@ -7,6 +7,7 @@ import { NotFoundPage } from './presentation/pages/NotFoundPage';
 import { RegisterPage } from './presentation/pages/RegisterPage';
 import { LoginPage } from './presentation/pages/LoginPage';
 import { Header } from './presentation/organisms/Header';
+import { AuthRoute } from './presentation/organisms/AuthRoute';
 import { LogoutUseCase } from './domain/auth/usecases/LogoutUseCase.js';
 import authRepositoryInstance from './domain/auth/repositories/AuthRepositoryInstance.js';
 
@@ -31,12 +32,36 @@ function App () {
       }/>
       <main>
         <Routes>
-          <Route path="/" element={<NotesPage/>}/>
-          <Route path="/notes/new" element={<NewNotePage/>}/>
-          <Route path="/notes/:id" element={<DetailPage/>}/>
-          <Route path="/archived" element={<ArchivedNotesPage/>}/>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/" element={
+            <AuthRoute requireAuth={true}>
+              <NotesPage/>
+            </AuthRoute>
+          }/>
+          <Route path="/notes/new" element={
+            <AuthRoute requireAuth={true}>
+              <NewNotePage/>
+            </AuthRoute>
+          }/>
+          <Route path="/notes/:id" element={
+            <AuthRoute requireAuth={true}>
+              <DetailPage/>
+            </AuthRoute>
+          }/>
+          <Route path="/archived" element={
+            <AuthRoute requireAuth={true}>
+              <ArchivedNotesPage/>
+            </AuthRoute>
+          }/>
+          <Route path="/register" element={
+            <AuthRoute requireAuth={false}>
+              <RegisterPage/>
+            </AuthRoute>
+          }/>
+          <Route path="/login" element={
+            <AuthRoute requireAuth={false}>
+              <LoginPage/>
+            </AuthRoute>
+          }/>
           <Route path="*" element={<NotFoundPage/>}/>
         </Routes>
       </main>
