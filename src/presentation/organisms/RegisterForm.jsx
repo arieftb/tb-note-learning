@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FormGroup } from '../molecules/FormGroup';
 import { Button } from '../atoms/Button';
 import { ErrorMessage } from '../atoms/ErrorMessage';
@@ -68,7 +69,7 @@ export const RegisterForm = ({
         </Button>
       </form>
       <p className="login-link">
-        Already have an account? <a href="/login">Login</a>
+        Already have an account? <Link to="/login">Login</Link>
       </p>
     </div>
   );
