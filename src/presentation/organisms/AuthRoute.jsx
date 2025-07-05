@@ -11,7 +11,11 @@ import PropTypes from 'prop-types';
  * @returns {React.ReactNode} - The rendered component
  */
 export function AuthRoute ({ children, requireAuth = false, redirectTo = requireAuth ? '/login' : '/' }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return null; // Or a loading spinner component
+  }
 
   if ((requireAuth && !isAuthenticated) || (!requireAuth && isAuthenticated)) {
     return <Navigate
