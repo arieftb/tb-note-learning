@@ -1,5 +1,29 @@
 /* Component styles */
 
+/* Header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    height: auto;
+}
+
+.app-header h1 {
+    margin: 0;
+    font-size: var(--font-size-xxlarge);
+}
+
+.app-header h1 a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.app-header h1 a:hover {
+    color: var(--color-secondary);
+}
+
 /* Navigation */
 .app-navigation {
     margin-bottom: 24px;
@@ -39,6 +63,83 @@
 }
 
 .nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Header Navigation */
+.app-header .navigation {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.app-header .navigation ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    align-items: center;
+    height: 100%;
+}
+
+.app-header .navigation li {
+    position: relative;
+    text-align: center;
+    margin: 0 var(--spacing-xs);
+    display: flex;
+    align-items: center;
+}
+
+.app-header .navigation li.active {
+    background-color: var(--color-secondary);
+}
+
+.app-header .navigation li.active a {
+    color: white;
+}
+
+.app-header .navigation a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: var(--border-radius);
+    height: 100%;
+}
+
+.app-header .navigation a:hover {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+.app-header .navigation .nav-link-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s, color 0.2s;
+    border-radius: var(--border-radius);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family), serif;
+    font-size: var(--font-size-normal);
+    line-height: normal;
+    margin: 0;
+    height: 100%;
+}
+
+.app-header .navigation .nav-link-button:hover {
     background-color: rgba(52, 152, 219, 0.1);
 }
 
@@ -253,4 +354,87 @@ button:disabled {
 
 .not-found-page .button {
     margin-top: 16px;
+}
+
+/* Register Page and Login Page */
+.register-page, .login-page {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.register-page h2, .login-page h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    color: var(--color-primary);
+}
+
+.register-form, .login-form {
+    background-color: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-text-light);
+    font-size: 0.8rem;
+}
+
+.register-button, .login-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    font-size: 1rem;
+}
+
+.error-message {
+    background-color: #ffecec;
+    color: #e74c3c;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    border-left: 4px solid #e74c3c;
+}
+
+.success-message {
+    background-color: #e7f9e7;
+    color: #27ae60;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-bottom: 16px;
+    border-left: 4px solid #27ae60;
+}
+
+.login-link, .register-link {
+    text-align: center;
+    margin-top: 16px;
+    color: var(--color-text-light);
+}
+
+.login-link a, .register-link a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover, .register-link a:hover {
+    text-decoration: underline;
 }

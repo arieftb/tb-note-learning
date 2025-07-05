@@ -1,16 +1,43 @@
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+// This file is no longer used and can be deleted.
+// The navigation functionality has been moved directly into the Header component.
 
-export const Navigation = ({ currentPath }) => {
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+
+export const Navigation = ({ currentPath, onLogoutClick }) => {
+  const isActivePage = currentPath === '/';
+  const isArchivedPage = currentPath === '/archived';
+  const isAddNewPage = currentPath === '/notes/new';
+
   return (
-    <nav className="app-navigation">
-      <ul className="nav-list">
-        <li className={currentPath === '/' ? 'nav-item active' : 'nav-item'}>
-          <Link to="/" className="nav-link">Active</Link>
-        </li>
-        <li className={currentPath === '/archived' ? 'nav-item active' : 'nav-item'}>
-          <Link to="/archived" className="nav-link">Archived</Link>
-        </li>
+    <nav className="navigation">
+      <ul>
+        {
+          !isActivePage && (
+            <li>
+              <Link to="/">Active</Link>
+            </li>
+          )
+        }
+        {
+          !isArchivedPage && (
+            <li>
+              <Link to="/archived">Archived</Link>
+            </li>
+          )
+        }
+        {
+          (isAddNewPage || isActivePage || isArchivedPage) && (
+            <li>
+              <button
+                onClick={onLogoutClick}
+                className="nav-link-button"
+              >
+                Logout
+              </button>
+            </li>
+          )
+        }
       </ul>
     </nav>
   );
@@ -18,4 +45,5 @@ export const Navigation = ({ currentPath }) => {
 
 Navigation.propTypes = {
   currentPath: PropTypes.string.isRequired,
+  onLogoutClick: PropTypes.func.isRequired
 };
