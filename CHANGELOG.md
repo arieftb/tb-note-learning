@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.2.0-alpha] - 2023-11-15
+
+### Added
+
+- Initial alpha release for version 2.2.0
+- Implemented user registration and authentication (login) features:
+  - Created a new registration page with inputs for name, email, password, and confirm password (optional)
+  - Created a new authentication (login) page with email and password inputs
+  - Added functionality to store authentication tokens in local storage
+  - Implemented user authentication state management to track user login status
+  - Added logout button to clear stored user authentication data
+
+### Changed
+
+- Change the navigation bar
+
 ## [2.1.0] - 2025-06-21
 
 ### Added
