@@ -9,7 +9,7 @@ import authRepository from '../../domain/auth/repositories/AuthRepositoryInstanc
 
 const getNotesUseCase = new GetNotesUseCase(noteRepository, authRepository);
 const submitArchiveNoteUseCase = new SubmitArchiveNoteUseCase(noteRepository);
-const searchNotesUseCase = new SearchNotesUseCase(noteRepository);
+const searchNotesUseCase = new SearchNotesUseCase(noteRepository, authRepository);
 
 export const NotesPage = () => {
   const navigate = useNavigate();
@@ -23,8 +23,15 @@ export const NotesPage = () => {
 
   const loadNotes = (keyword) => {
     if (keyword) {
-      const notes = searchNotesUseCase.execute(keyword);
-      setActiveNotes(notes);
+      searchNotesUseCase.execute(keyword).then((notes) => {
+        setActiveNotes(notes);
+      }).catch((error) => {
+        console.error('Failed to load notes:', error);
+        if (error.message === 'NOT_LOGGED_IN') {
+          navigate('/login', { replace: true });
+        }
+        setActiveNotes([]);
+      });
       return;
     }
 

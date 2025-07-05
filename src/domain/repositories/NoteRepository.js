@@ -57,10 +57,9 @@ export class NoteRepository {
   async getNotes (token) {
     const response = await fetchCollection(token);
     const { data } = await response.json();
+    this.notes = data.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }));
 
-    return data
-      .filter(note => !note.archived)
-      .map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }))
+    return this.notes
       .sort((a, b) => {
         const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
         return dateDiff !== 0 ? dateDiff : a.title.localeCompare(b.title);
@@ -80,8 +79,9 @@ export class NoteRepository {
     });
   }
 
-  searchNotes (query) {
-    return this.getNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
+  async searchNotes (query, token) {
+    await this.getNotes(token);
+    return this.notes.filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
   searchArchivedNotes (query) {

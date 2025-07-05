@@ -5,8 +5,6 @@ export class GetNotesUseCase {
   }
 
   async execute () {
-    console.log('GetNotesUseCase.execute called');
-
     const isLoggedIn = await this.authRepository.getAuthStatus();
 
     if (!isLoggedIn) {
