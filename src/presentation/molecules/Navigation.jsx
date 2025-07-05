@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 export const Navigation = ({ currentPath, onLogoutClick }) => {
   const isActivePage = currentPath === '/';
   const isArchivedPage = currentPath === '/archived';
-  const isAddNewPage = currentPath === '/notes/new';
+  const isDetailPage = currentPath.startsWith('/notes/');
 
   return (
     <nav className="navigation">
@@ -27,7 +27,7 @@ export const Navigation = ({ currentPath, onLogoutClick }) => {
           )
         }
         {
-          (isAddNewPage || isActivePage || isArchivedPage) && (
+          (isActivePage || isArchivedPage || isDetailPage) && (
             <li>
               <button
                 onClick={onLogoutClick}
