@@ -99,8 +99,9 @@ export class NoteRepository {
     return this.notes.filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
-  searchArchivedNotes (query) {
-    return this.getArchivedNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
+  async searchArchivedNotes (query, token) {
+    await this.getArchivedNotes(token);
+    return this.notes.filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
   async getNoteById (id, token) {

@@ -9,7 +9,7 @@ import authRepository from '../../domain/auth/repositories/AuthRepositoryInstanc
 
 const getArchiveNotesUseCase = new GetArchiveNotesUseCase(noteRepository, authRepository);
 const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository, authRepository);
-const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository);
+const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository, authRepository);
 
 export const ArchivedNotesPage = () => {
   const navigate = useNavigate();
@@ -23,8 +23,15 @@ export const ArchivedNotesPage = () => {
 
   const loadArchivedNotes = (keyword) => {
     if (keyword) {
-      const archivedNotes = searchArchivedNotesUseCase.execute(keyword);
-      setArchivedNotes(archivedNotes);
+      searchArchivedNotesUseCase.execute(keyword).then((notes) => {
+        setArchivedNotes(notes);
+      }).catch((error) => {
+        console.error('Failed to load archived notes:', error);
+        if (error.message === 'NOT_LOGGED_IN') {
+          navigate('/login', { replace: true });
+        }
+        setArchivedNotes([]);
+      });
       return;
     }
 
