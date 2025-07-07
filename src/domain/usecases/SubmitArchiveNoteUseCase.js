@@ -1,9 +1,18 @@
 export class SubmitArchiveNoteUseCase {
-  constructor (noteRepository) {
+  constructor (noteRepository, authRepository) {
     this.noteRepository = noteRepository;
+    this.authRepository = authRepository;
   }
 
-  execute (id) {
-    return this.noteRepository.archiveNote(id) != null;
+  async execute (id) {
+    const isLoggedIn = await this.authRepository.getAuthStatus();
+
+    if (!isLoggedIn) {
+      throw new Error('NOT_LOGGED_IN');
+    }
+
+    const token = await this.authRepository.getToken();
+
+    return await this.noteRepository.archiveNote(id, token);
   }
 }

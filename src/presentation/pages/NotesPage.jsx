@@ -8,7 +8,7 @@ import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance.js';
 
 const getNotesUseCase = new GetNotesUseCase(noteRepository, authRepository);
-const submitArchiveNoteUseCase = new SubmitArchiveNoteUseCase(noteRepository);
+const submitArchiveNoteUseCase = new SubmitArchiveNoteUseCase(noteRepository, authRepository);
 const searchNotesUseCase = new SearchNotesUseCase(noteRepository, authRepository);
 
 export const NotesPage = () => {
@@ -47,8 +47,14 @@ export const NotesPage = () => {
   };
 
   const handleToggleArchive = (id) => {
-    submitArchiveNoteUseCase.execute(id);
-    loadNotes(searchQuery);
+    submitArchiveNoteUseCase.execute(id).then(() => {
+      loadNotes(searchQuery);
+    }).catch((error) => {
+      console.error('Failed to archive note:', error);
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   const handleSearchChange = (keyword) => {

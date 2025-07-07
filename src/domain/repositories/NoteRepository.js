@@ -1,5 +1,11 @@
 import { getInitialData } from '../../data/source/NoteSource.js';
-import { addNote, deleteNote, fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
+import {
+  addNote,
+  archiveNote,
+  deleteNote,
+  fetchById,
+  fetchCollection
+} from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
@@ -30,15 +36,14 @@ export class NoteRepository {
     return null;
   }
 
-  archiveNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      const [noteToArchive] = this.notes.splice(index, 1);
-      noteToArchive.archived = true;
-      this.notes.push(noteToArchive);
-      return noteToArchive;
+  async archiveNote (id, token) {
+    const response = await archiveNote(id, token);
+
+    if (response.error) {
+      throw new Error(response.error);
     }
-    return null;
+
+    return true;
   }
 
   unarchiveNote (id) {
