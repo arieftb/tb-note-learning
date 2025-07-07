@@ -41,4 +41,21 @@ async function fetchById (id, token) {
   return { error: false, data: responseJson.data };
 }
 
-export { fetchCollection, fetchById };
+async function deleteNote (id, token) {
+  const response = await get(`${BASE_URL}/notes/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+export { fetchCollection, fetchById, deleteNote };

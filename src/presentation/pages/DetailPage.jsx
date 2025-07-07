@@ -7,7 +7,7 @@ import authRepository from '../../domain/auth/repositories/AuthRepositoryInstanc
 import { Button } from '../atoms/Button';
 
 const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository, authRepository);
-const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository);
+const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository, authRepository);
 
 export const DetailPage = () => {
   const { id } = useParams();
@@ -23,11 +23,17 @@ export const DetailPage = () => {
         navigate('/login', { replace: true });
       }
     });
-  }, [id]);
+  }, [id, navigate]);
 
   const handleDeleteNote = () => {
-    deleteNoteUseCase.execute(id);
-    navigate('/');
+    deleteNoteUseCase.execute(id).then(() => {
+      navigate('/', { replace: true });
+    }).catch((error) => {
+      console.error('Failed to delete note:', error);
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   if (!note) {

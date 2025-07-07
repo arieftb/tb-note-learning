@@ -1,5 +1,5 @@
 import { getInitialData } from '../../data/source/NoteSource.js';
-import { fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
+import { deleteNote, fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
@@ -23,11 +23,13 @@ export class NoteRepository {
     return newNote;
   }
 
-  deleteNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      return this.notes.splice(index, 1)[0];
+  async deleteNote (id, token) {
+    const response = await deleteNote(id, token);
+
+    if (response.error) {
+      throw new Error(response.error);
     }
+
     return null;
   }
 
