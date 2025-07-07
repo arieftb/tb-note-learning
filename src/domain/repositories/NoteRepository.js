@@ -1,5 +1,5 @@
 import { getInitialData } from '../../data/source/NoteSource.js';
-import { fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
+import { fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
@@ -56,7 +56,13 @@ export class NoteRepository {
 
   async getNotes (token) {
     const response = await fetchCollection(token);
-    const { data } = await response.json();
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    const data = await response.data;
+
     this.notes = data.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }));
 
     return this.notes
@@ -88,9 +94,15 @@ export class NoteRepository {
     return this.getArchivedNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
-  getNoteById (id) {
-    return this.notes.find(note => {
-      return note.id === id;
-    }) || null;
+  async getNoteById (id, token) {
+    const note = await fetchById(id, token);
+
+    if (note.error) {
+      throw new Error(note.error);
+    }
+
+    console.log(note);
+
+    return await note.data;
   }
 }

@@ -1,11 +1,44 @@
 const BASE_URL = 'https://notes-api.dicoding.dev/v1';
 
-async function fetchCollection (token) {
-  return fetch(`${BASE_URL}/notes`, {
+async function get (url, options = {}) {
+  return fetch(url, {
+    ...options,
     headers: {
-      Authorization: `Bearer ${token}`,
+      ...options.headers,
+      'Content-Type': 'application/json',
     },
   });
 }
 
-export { fetchCollection };
+async function fetchCollection (token) {
+  const response = await get(`${BASE_URL}/notes`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+async function fetchById (id, token) {
+  const response = await get(`${BASE_URL}/notes/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+export { fetchCollection, fetchById };

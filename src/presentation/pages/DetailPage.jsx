@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { GetNoteByIdUseCase } from '../../domain/usecases/GetNoteByIdUseCase';
 import { DeleteNoteUseCase } from '../../domain/usecases/DeleteNoteUseCase';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
+import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance';
 import { Button } from '../atoms/Button';
 
-const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository);
+const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository, authRepository);
 const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository);
 
 export const DetailPage = () => {
@@ -14,12 +15,14 @@ export const DetailPage = () => {
   const [note, setNote] = useState(null);
 
   useEffect(() => {
-    const fetchNote = () => {
-      const foundNote = getNoteByIdUseCase.execute(id);
-      setNote(foundNote);
-    };
-
-    fetchNote();
+    getNoteByIdUseCase.execute(id).then((note) => {
+      setNote(note);
+    }).catch((error) => {
+      console.error('Failed to load note:', error);
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   }, [id]);
 
   const handleDeleteNote = () => {
