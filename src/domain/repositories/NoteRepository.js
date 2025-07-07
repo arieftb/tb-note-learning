@@ -3,6 +3,7 @@ import {
   addNote,
   archiveNote,
   deleteNote,
+  fetchArchivedCollection,
   fetchById,
   fetchCollection
 } from '../../data/note/infrastructure/NoteRemoteService.js';
@@ -76,17 +77,22 @@ export class NoteRepository {
       });
   }
 
-  getArchivedNotes () {
-    return this.notes.filter(note => note.archived).sort((a, b) => {
-      const dateA = new Date(a.createdAt).getTime();
-      const dateB = new Date(b.createdAt).getTime();
+  async getArchivedNotes (token) {
+    const response = await fetchArchivedCollection(token);
 
-      if (dateA !== dateB) {
-        return dateB - dateA;
-      }
+    if (response.error) {
+      throw new Error(response.error);
+    }
 
-      return a.title.localeCompare(b.title);
-    });
+    const data = await response.data;
+
+    this.notes = data.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }));
+
+    return this.notes
+      .sort((a, b) => {
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        return dateDiff !== 0 ? dateDiff : a.title.localeCompare(b.title);
+      });
   }
 
   async searchNotes (query, token) {
