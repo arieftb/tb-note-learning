@@ -8,7 +8,7 @@ import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance';
 
 const getArchiveNotesUseCase = new GetArchiveNotesUseCase(noteRepository, authRepository);
-const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository);
+const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository, authRepository);
 const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository);
 
 export const ArchivedNotesPage = () => {
@@ -40,8 +40,14 @@ export const ArchivedNotesPage = () => {
   };
 
   const handleToggleUnArchive = (id) => {
-    submitUnArchiveNoteUseCase.execute(id);
-    loadArchivedNotes(searchQuery);
+    submitUnArchiveNoteUseCase.execute(id).then(() => {
+      loadArchivedNotes(searchQuery);
+    }).catch((error) => {
+      console.error('Failed to unarchive note:', error);
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   const handleSearchChange = (keyword) => {

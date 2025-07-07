@@ -5,7 +5,8 @@ import {
   deleteNote,
   fetchArchivedCollection,
   fetchById,
-  fetchCollection
+  fetchCollection,
+  unarchiveNote
 } from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
@@ -47,16 +48,14 @@ export class NoteRepository {
     return true;
   }
 
-  unarchiveNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      const [noteToUnarchive] = this.notes.splice(index, 1);
-      noteToUnarchive.archived = false;
-      this.notes.push(noteToUnarchive);
-      return noteToUnarchive;
+  async unarchiveNote (id, token) {
+    const response = await unarchiveNote(id, token);
+
+    if (response.error) {
+      throw new Error(response.error);
     }
 
-    return null;
+    return true;
   }
 
   async getNotes (token) {

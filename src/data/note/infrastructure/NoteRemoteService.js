@@ -108,4 +108,21 @@ async function fetchArchivedCollection (token) {
   return { error: false, data: responseJson.data };
 }
 
-export { fetchCollection, fetchById, deleteNote, addNote, archiveNote, fetchArchivedCollection };
+async function unarchiveNote (id, token) {
+  const response = await get(`${BASE_URL}/notes/${id}/unarchive`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+export { fetchCollection, fetchById, deleteNote, addNote, archiveNote, fetchArchivedCollection, unarchiveNote };
