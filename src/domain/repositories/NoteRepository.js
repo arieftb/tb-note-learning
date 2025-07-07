@@ -1,26 +1,23 @@
 import { getInitialData } from '../../data/source/NoteSource.js';
-import { deleteNote, fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
+import { addNote, deleteNote, fetchById, fetchCollection } from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
     this.notes = getInitialData();
   }
 
-  addNote (title, body) {
-    const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    const date = new Date();
-    const timeStamp = date.getTime();
+  async addNote (title, body, token) {
+    const response = await addNote({
+        title,
+        body,
+      },
+      token);
 
-    const newNote = {
-      id: `${randomString}-${timeStamp}`,
-      title: title,
-      body: body,
-      archived: false,
-      createdAt: date.toISOString(),
-    };
-    this.notes.push(newNote);
+    if (response.error) {
+      throw new Error(response.error);
+    }
 
-    return newNote;
+    return await response.data;
   }
 
   async deleteNote (id, token) {

@@ -58,4 +58,22 @@ async function deleteNote (id, token) {
   return { error: false, data: responseJson.data };
 }
 
-export { fetchCollection, fetchById, deleteNote };
+async function addNote ({ title, body }, token) {
+  const response = await get(`${BASE_URL}/notes`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ title, body }),
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+export { fetchCollection, fetchById, deleteNote, addNote };
