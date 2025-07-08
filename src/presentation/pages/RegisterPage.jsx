@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Name } from '../../domain/auth/model/Name';
 import { Email } from '../../domain/auth/model/Email';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Email } from '../../domain/auth/model/Email';
 import { Password } from '../../domain/auth/model/Password';
 import { Login } from '../../domain/auth/model/Login';
