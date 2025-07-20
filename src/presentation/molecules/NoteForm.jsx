@@ -29,7 +29,7 @@ export const NoteForm = ({ onSubmit }) => {
           className="w-100 mb-1"
         />
         <small className={`char-limit ${isCharLimitExceeded ? 'text-accent' : 'text-light'}`}>
-          {remainingChars} karakter tersisa
+          {remainingChars} remaining character
         </small>
       </div>
       <div className="note-form-group">
@@ -46,7 +46,7 @@ export const NoteForm = ({ onSubmit }) => {
         disabled={isCharLimitExceeded}
         className="w-100"
       >
-        Tambah Catatan
+        Add Note
       </Button>
     </form>
   );
@@ -55,10 +55,3 @@ export const NoteForm = ({ onSubmit }) => {
 NoteForm.propTypes = {
   onSubmit: PropTypes.func.isRequired
 };
-
-// Additional PropType documentation for the onSubmit callback
-// The onSubmit function will receive an object with the following shape:
-// {
-//   title: string,
-//   body: string
-// }

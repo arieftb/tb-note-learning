@@ -68,7 +68,6 @@ export const RegisterPage = () => {
         setPassword('');
         setPasswordConfirmation('');
 
-        // Navigate to login page after 3 seconds
         setTimeout(() => {
           navigate('/login');
         }, 3000);

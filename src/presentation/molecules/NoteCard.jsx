@@ -17,7 +17,7 @@ export const NoteCard = ({ note, onToggleArchive }) => {
           <Button
             onClick={() => onToggleArchive(note.id)}
           >
-            {note.archived ? 'Aktifkan' : 'Arsipkan'}
+            {note.archived ? 'Active' : 'Archive'}
           </Button>
         </div>
       </div>

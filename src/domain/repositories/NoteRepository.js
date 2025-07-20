@@ -1,4 +1,3 @@
-import { getInitialData } from '../../data/source/NoteSource.js';
 import {
   addNote,
   archiveNote,
@@ -11,7 +10,7 @@ import {
 
 export class NoteRepository {
   constructor () {
-    this.notes = getInitialData();
+    this.notes = [];
   }
 
   async addNote (title, body, token) {
@@ -110,8 +109,6 @@ export class NoteRepository {
     if (note.error) {
       throw new Error(note.error);
     }
-
-    console.log(note);
 
     return await note.data;
   }
