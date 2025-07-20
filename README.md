@@ -4,13 +4,18 @@ TB Note is a simple, clean, and efficient note-taking application built with Rea
 
 ## Features
 
+- User authentication with registration and login functionality
+- Protected routes for secure access to authenticated pages
 - Create notes with title and body content through a dedicated Add Note page
 - View detailed information for individual notes
 - Archive and unarchive notes for better organization
 - Dedicated page for archived notes for better separation of concerns
+- Theme switching functionality for a better user experience
+- Internationalization with translation support
+- Loading indicators for improved user feedback during operations
 - Improved navigation between different sections of the application
-- Enhanced search functionality with URL-based parameters and persistent search state
-- 404 Not Found page for better error handling of undefined routes
+- Enhanced search functionality with URL-based parameters and a persistent search state
+- 404 page for better error handling of undefined routes
 - Responsive design for various screen sizes
 - Clean architecture implementation with separation of concerns
 
@@ -60,6 +65,30 @@ functionality features:
 - **Maintained State**: Search state is maintained during navigation between pages
 - **Consistent Experience**: The same search behavior works across both active and archived notes pages
 
+### Authentication
+
+The application includes user authentication features:
+
+- **Registration**: Create a new account by providing your name, email, and password
+- **Login**: Access your notes by logging in with your email and password
+- **Protected Routes**: Certain pages are only accessible to authenticated users
+- **Logout**: Sign out of your account when you're done
+
+### Theme Switching
+
+Customize your experience with theme options:
+
+- Toggle between light and dark themes based on your preference
+- Theme selection is preserved between sessions
+
+### Language Settings
+
+The application supports multiple languages:
+
+- Switch between available languages in the settings
+- All UI elements are automatically translated based on your language selection
+- Language preference is saved for future sessions
+
 ## Project Structure
 
 The project follows a clean architecture approach with the following structure:
@@ -67,8 +96,15 @@ The project follows a clean architecture approach with the following structure:
 ```
 src/
 ├── assets/            # Static assets
+├── context/           # React Context for state management
+│   ├── ThemeContext   # Theme switching functionality
+│   ├── LanguageContext# Internationalization support
+│   └── useTranslation # Translation hook
 ├── data/              # Data layer
-│   └── source/        # Data sources
+│   ├── auth/          # Authentication data services
+│   ├── note/          # Note data services
+│   ├── source/        # Data sources
+│   └── translations.js# Translation strings
 ├── domain/            # Domain layer
 │   ├── repositories/  # Repository interfaces
 │   └── usecases/      # Business logic use cases
@@ -83,16 +119,23 @@ src/
 
 ## Technologies Used
 
-- **React 19** - UI library
+- **React 19.0.0** - UI library
 - **React Router DOM 7.6.1** - For routing and navigation
-- **Vite** - Build tool and development server
-- **PropTypes** - Runtime type checking for React props
-- **ESLint** - For code linting and maintaining code quality
+- **Vite 6.2.0** - Build tool and development server
+- **PropTypes 15.8.1** - Runtime type checking for React props
+- **ESLint 9.21.0** - For code linting and maintaining code quality
+- **Context API** - For state management (theme, language)
 - **Clean Architecture** - For separation of concerns and maintainability
 
 ## Disclaimer
 
 This project is used as part of my learning process in the online course [Belajar Membuat Aplikasi Web dengan React](https://www.dicoding.com/academies/403-belajar-membuat-aplikasi-web-dengan-react) from Dicoding.
+
+## Version
+
+Current version: 2.2.0 (Release Candidate)
+
+For a detailed list of changes, please see the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## License
 

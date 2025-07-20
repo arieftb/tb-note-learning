@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
+## [2.2.0-rc] - 2025-07-20
+
+### Added
+
+- Release candidate for version 2.2.0
+- Implemented Protected Route for secure access to authenticated pages
+- Added Theme Switching functionality for better user experience
+- Implemented Loading Indicator for improved user feedback during operations
+- Added Translation support for internationalization
+
+### Changed
+
+- Refactored Non-Archived Notes handling for better performance
+- Improved Search functionality for Non-Archived Notes
+- Enhanced Detail Note view with better user interface
+- Optimized Delete note functionality
+- Improved Add note process
+- Enhanced Archive/Unarchive note functionality
+- Refined search for archived notes
+- Removed unused code for better maintainability
+
+### Fixed
+
+- Fixed Authentication Page Navigation issues
+- Corrected Navigation Menu behavior
+- Resolved Auth Route problems
+
 ## [2.2.0-alpha] - 2025-07-05
 
 ### Added
