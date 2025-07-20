@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Navigation } from '../molecules/Navigation.jsx';
+import { ThemeToggle } from '../atoms/ThemeToggle';
 
 export const Header = ({ currentPath, onLogoutClick }) => {
   const isRegisterPage = currentPath === '/register';
@@ -9,13 +10,16 @@ export const Header = ({ currentPath, onLogoutClick }) => {
   return (
     <header className="app-header">
       <h1><Link to="/">TB Note</Link></h1>
-      {!isRegisterPage && !isLoginPage && (
-        <Navigation currentPath={
-          currentPath
-        } onLogoutClick={
-          onLogoutClick
-        }/>
-      )}
+      <div className="header-right">
+        {!isRegisterPage && !isLoginPage && (
+          <Navigation currentPath={
+            currentPath
+          } onLogoutClick={
+            onLogoutClick
+          }/>
+        )}
+        <ThemeToggle/>
+      </div>
     </header>
   );
 };
