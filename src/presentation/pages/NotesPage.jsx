@@ -14,6 +14,7 @@ const searchNotesUseCase = new SearchNotesUseCase(noteRepository, authRepository
 export const NotesPage = () => {
   const navigate = useNavigate();
   const [activeNotes, setActiveNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('keyword') || '';
 
@@ -22,27 +23,33 @@ export const NotesPage = () => {
   }, [searchQuery]);
 
   const loadNotes = (keyword) => {
+    setIsLoading(true);
+
     if (keyword) {
       searchNotesUseCase.execute(keyword).then((notes) => {
         setActiveNotes(notes);
+        setIsLoading(false);
       }).catch((error) => {
         console.error('Failed to load notes:', error);
         if (error.message === 'NOT_LOGGED_IN') {
           navigate('/login', { replace: true });
         }
         setActiveNotes([]);
+        setIsLoading(false);
       });
       return;
     }
 
     getNotesUseCase.execute().then((notes) => {
       setActiveNotes(notes);
+      setIsLoading(false);
     }).catch((error) => {
       console.error('Failed to load notes:', error);
       if (error.message === 'NOT_LOGGED_IN') {
         navigate('/login', { replace: true });
       }
       setActiveNotes([]);
+      setIsLoading(false);
     });
   };
 
@@ -71,6 +78,7 @@ export const NotesPage = () => {
       searchQuery={searchQuery}
       onSearchChange={handleSearchChange}
       onToggleArchive={handleToggleArchive}
+      isLoading={isLoading}
     />
   );
 };

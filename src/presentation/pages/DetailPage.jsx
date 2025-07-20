@@ -5,6 +5,7 @@ import { DeleteNoteUseCase } from '../../domain/usecases/DeleteNoteUseCase';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance';
 import { Button } from '../atoms/Button';
+import { LoadingIndicator } from '../atoms/LoadingIndicator';
 
 const getNoteByIdUseCase = new GetNoteByIdUseCase(noteRepository, authRepository);
 const deleteNoteUseCase = new DeleteNoteUseCase(noteRepository, authRepository);
@@ -13,15 +14,19 @@ export const DetailPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [note, setNote] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    setIsLoading(true);
     getNoteByIdUseCase.execute(id).then((note) => {
       setNote(note);
+      setIsLoading(false);
     }).catch((error) => {
       console.error('Failed to load note:', error);
       if (error.message === 'NOT_LOGGED_IN') {
         navigate('/login', { replace: true });
       }
+      setIsLoading(false);
     });
   }, [id, navigate]);
 
@@ -35,6 +40,16 @@ export const DetailPage = () => {
       }
     });
   };
+
+  if (isLoading) {
+    return (
+      <div className="container">
+        <div className="note-detail">
+          <LoadingIndicator size="large"/>
+        </div>
+      </div>
+    );
+  }
 
   if (!note) {
     return (

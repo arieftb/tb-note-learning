@@ -1,5 +1,6 @@
 import { NoteSearch } from '../molecules/NoteSearch';
 import { NoteList } from '../organisms/NoteList';
+import { LoadingIndicator } from '../atoms/LoadingIndicator';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
@@ -8,6 +9,7 @@ export const NotesLayout = ({
   searchQuery,
   onSearchChange,
   onToggleArchive,
+  isLoading = false,
 }) => {
   return (
     <div className="container">
@@ -18,11 +20,15 @@ export const NotesLayout = ({
       <section className="mb-5">
         <h2 className="mb-3">Active Notes</h2>
         <div className="notes-grid">
-          <NoteList
-            notes={activeNotes}
-            onToggleArchive={onToggleArchive}
-            emptyMessage="Tidak ada catatan aktif"
-          />
+          {isLoading ? (
+            <LoadingIndicator size="medium"/>
+          ) : (
+            <NoteList
+              notes={activeNotes}
+              onToggleArchive={onToggleArchive}
+              emptyMessage="Tidak ada catatan aktif"
+            />
+          )}
         </div>
       </section>
 
@@ -47,4 +53,5 @@ NotesLayout.propTypes = {
   searchQuery: PropTypes.string.isRequired,
   onSearchChange: PropTypes.func.isRequired,
   onToggleArchive: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool
 };
