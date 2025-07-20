@@ -3,6 +3,7 @@ import { NoteList } from '../organisms/NoteList';
 import { LoadingIndicator } from '../atoms/LoadingIndicator';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../context/useTranslation';
 
 export const NotesLayout = ({
   activeNotes,
@@ -11,6 +12,7 @@ export const NotesLayout = ({
   onToggleArchive,
   isLoading = false,
 }) => {
+  const { translate } = useTranslation();
   return (
     <div className="container">
       <section className="mb-4">
@@ -18,7 +20,7 @@ export const NotesLayout = ({
       </section>
 
       <section className="mb-5">
-        <h2 className="mb-3">Active Notes</h2>
+        <h2 className="mb-3">{translate('activeNotes')}</h2>
         <div className="notes-grid">
           {isLoading ? (
             <LoadingIndicator size="medium"/>
@@ -26,7 +28,7 @@ export const NotesLayout = ({
             <NoteList
               notes={activeNotes}
               onToggleArchive={onToggleArchive}
-              emptyMessage="Tidak ada catatan aktif"
+              emptyMessage={translate('noNotes')}
             />
           )}
         </div>

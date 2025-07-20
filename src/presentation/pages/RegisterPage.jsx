@@ -8,9 +8,11 @@ import { RegisterUseCase } from '../../domain/auth/usecases/RegisterUseCase';
 import { AuthRepository } from '../../domain/auth/repositories/AuthRepository';
 import { RegisterForm } from '../organisms/RegisterForm';
 import { SuccessMessage } from '../atoms/SuccessMessage';
+import { useTranslation } from '../../context/useTranslation';
 
 export const RegisterPage = () => {
   const navigate = useNavigate();
+  const { translate } = useTranslation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -43,7 +45,7 @@ export const RegisterPage = () => {
 
     // Check if passwords match
     if (password !== passwordConfirmation) {
-      setErrors({ general: 'Passwords do not match' });
+      setErrors({ general: translate('passwordsMustMatch') });
       setIsLoading(false);
       return;
     }
@@ -61,7 +63,7 @@ export const RegisterPage = () => {
       const result = await registerUseCase.execute(registration);
 
       if (!result.error) {
-        setSuccessMessage('Registration successful! You will be redirected to the login page in 3 seconds.');
+        setSuccessMessage(translate('registerSuccessRedirect'));
         // Clear form fields after successful registration
         setName('');
         setEmail('');
@@ -83,7 +85,7 @@ export const RegisterPage = () => {
 
   return (
     <section className="register-page">
-      <h2>Register</h2>
+      <h2>{translate('register')}</h2>
       <SuccessMessage message={successMessage}/>
       <RegisterForm
         name={name}

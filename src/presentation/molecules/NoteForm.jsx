@@ -3,10 +3,12 @@ import { Input } from '../atoms/Input';
 import { Textarea } from '../atoms/Textarea';
 import { Button } from '../atoms/Button';
 import PropTypes from 'prop-types';
+import { useTranslation } from '../../context/useTranslation';
 
 export const NoteForm = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const { translate } = useTranslation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,19 +26,19 @@ export const NoteForm = ({ onSubmit }) => {
         <Input
           value={title}
           onChange={(value) => setTitle(value)}
-          placeholder="Judul catatan"
+          placeholder={translate('noteTitle')}
           required
           className="w-100 mb-1"
         />
         <small className={`char-limit ${isCharLimitExceeded ? 'text-accent' : 'text-light'}`}>
-          {remainingChars} remaining character
+          {remainingChars} {translate('remainingCharacter')}
         </small>
       </div>
       <div className="note-form-group">
         <Textarea
           value={body}
           onChange={(e) => setBody(e.target.value)}
-          placeholder="Isi catatan"
+          placeholder={translate('noteContent')}
           required
           className="w-100"
         />
@@ -46,7 +48,7 @@ export const NoteForm = ({ onSubmit }) => {
         disabled={isCharLimitExceeded}
         className="w-100"
       >
-        Add Note
+        {translate('addNote')}
       </Button>
     </form>
   );

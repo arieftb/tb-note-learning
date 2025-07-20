@@ -6,6 +6,7 @@ import { SubmitArchiveNoteUseCase } from '../../domain/usecases/SubmitArchiveNot
 import { SearchNotesUseCase } from '../../domain/usecases/SearchNotesUseCase.js';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance.js';
+import { useTranslation } from '../../context/useTranslation';
 
 const getNotesUseCase = new GetNotesUseCase(noteRepository, authRepository);
 const submitArchiveNoteUseCase = new SubmitArchiveNoteUseCase(noteRepository, authRepository);
@@ -13,6 +14,7 @@ const searchNotesUseCase = new SearchNotesUseCase(noteRepository, authRepository
 
 export const NotesPage = () => {
   const navigate = useNavigate();
+  const { translate } = useTranslation();
   const [activeNotes, setActiveNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +32,7 @@ export const NotesPage = () => {
         setActiveNotes(notes);
         setIsLoading(false);
       }).catch((error) => {
-        console.error('Failed to load notes:', error);
+        console.error(`${translate('failedLoadNotes')}:`, error);
         if (error.message === 'NOT_LOGGED_IN') {
           navigate('/login', { replace: true });
         }
@@ -44,7 +46,7 @@ export const NotesPage = () => {
       setActiveNotes(notes);
       setIsLoading(false);
     }).catch((error) => {
-      console.error('Failed to load notes:', error);
+      console.error(`${translate('failedLoadNotes')}:`, error);
       if (error.message === 'NOT_LOGGED_IN') {
         navigate('/login', { replace: true });
       }
@@ -57,7 +59,7 @@ export const NotesPage = () => {
     submitArchiveNoteUseCase.execute(id).then(() => {
       loadNotes(searchQuery);
     }).catch((error) => {
-      console.error('Failed to archive note:', error);
+      console.error(`${translate('failedArchiveNote')}:`, error);
       if (error.message === 'NOT_LOGGED_IN') {
         navigate('/login', { replace: true });
       }

@@ -7,6 +7,7 @@ import { AuthRepository } from '../../domain/auth/repositories/AuthRepository';
 import { LoginForm } from '../organisms/LoginForm';
 import { SuccessMessage } from '../atoms/SuccessMessage';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../../context/useTranslation';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ export const LoginPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { translate } = useTranslation();
 
   const handleEmailChange = (value) => {
     setEmail(value);
@@ -42,7 +44,7 @@ export const LoginPage = () => {
       const result = await loginUseCase.execute(login);
 
       if (!result.error) {
-        setSuccessMessage('Login successful!');
+        setSuccessMessage(translate('loginSuccess'));
         // Redirect to home page after successful login
         setTimeout(() => {
           navigate('/');
@@ -59,7 +61,7 @@ export const LoginPage = () => {
 
   return (
     <section className="login-page">
-      <h2>Login</h2>
+      <h2>{translate('login')}</h2>
       <SuccessMessage message={successMessage}/>
       <LoginForm
         email={email}

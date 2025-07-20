@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FormGroup } from '../molecules/FormGroup';
 import { Button } from '../atoms/Button';
 import { ErrorMessage } from '../atoms/ErrorMessage';
+import { useTranslation } from '../../context/useTranslation';
 
 export const LoginForm = ({
   email,
@@ -14,13 +15,14 @@ export const LoginForm = ({
   generalError,
   className = 'login-form'
 }) => {
+  const { translate } = useTranslation();
   return (
     <div className={className}>
       <ErrorMessage message={generalError}/>
       <form onSubmit={onSubmit}>
         <FormGroup
           id="email"
-          label="Email"
+          label={translate('email')}
           type="email"
           value={email}
           onChange={onEmailChange}
@@ -28,25 +30,25 @@ export const LoginForm = ({
         />
         <FormGroup
           id="password"
-          label="Password"
+          label={translate('password')}
           type="password"
           value={password}
           onChange={onPasswordChange}
           required
           minLength={6}
         >
-          <small>Password must be at least 6 characters long</small>
+          <small>{translate('passwordRequirements')}</small>
         </FormGroup>
         <Button
           type="submit"
           className="login-button"
           disabled={isLoading}
         >
-          {isLoading ? 'Logging in...' : 'Login'}
+          {isLoading ? translate('loggingIn') : translate('login')}
         </Button>
       </form>
       <p className="register-link">
-        Don't have an account? <Link to="/register">Register</Link>
+        {translate('dontHaveAccount')} <Link to="/register">{translate('register')}</Link>
       </p>
     </div>
   );

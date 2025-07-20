@@ -6,6 +6,7 @@ import { SubmitUnArchiveNoteUseCase } from '../../domain/usecases/SubmitUnArchiv
 import { SearchArchiveNoteUseCase } from '../../domain/usecases/SearchArchiveNoteUseCase.js';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
 import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance';
+import { useTranslation } from '../../context/useTranslation';
 
 const getArchiveNotesUseCase = new GetArchiveNotesUseCase(noteRepository, authRepository);
 const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository, authRepository);
@@ -13,6 +14,7 @@ const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository, 
 
 export const ArchivedNotesPage = () => {
   const navigate = useNavigate();
+  const { translate } = useTranslation();
   const [archivedNotes, setArchivedNotes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,7 +32,7 @@ export const ArchivedNotesPage = () => {
         setArchivedNotes(notes);
         setIsLoading(false);
       }).catch((error) => {
-        console.error('Failed to load archived notes:', error);
+        console.error(`${translate('failedLoadArchivedNotes')}:`, error);
         if (error.message === 'NOT_LOGGED_IN') {
           navigate('/login', { replace: true });
         }
@@ -41,10 +43,11 @@ export const ArchivedNotesPage = () => {
     }
 
     getArchiveNotesUseCase.execute().then((notes) => {
+      console.log(notes);
       setArchivedNotes(notes);
       setIsLoading(false);
     }).catch((error) => {
-      console.log('Failed to load archived notes:', error);
+      console.log(`${translate('failedLoadArchivedNotes')}:`, error);
       setArchivedNotes([]);
       setIsLoading(false);
 
@@ -58,7 +61,7 @@ export const ArchivedNotesPage = () => {
     submitUnArchiveNoteUseCase.execute(id).then(() => {
       loadArchivedNotes(searchQuery);
     }).catch((error) => {
-      console.error('Failed to unarchive note:', error);
+      console.error(`${translate('failedUnarchiveNote')}:`, error);
       if (error.message === 'NOT_LOGGED_IN') {
         navigate('/login', { replace: true });
       }

@@ -66,7 +66,7 @@ export class NoteRepository {
 
     const data = await response.data;
 
-    this.notes = data.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }));
+    this.notes = data.map(({ id, title, body, createdAt, archived }) => ({ id, title, body, createdAt, archived }));
 
     return this.notes
       .sort((a, b) => {
@@ -84,7 +84,7 @@ export class NoteRepository {
 
     const data = await response.data;
 
-    this.notes = data.map(({ id, title, body, createdAt }) => ({ id, title, body, createdAt }));
+    this.notes = data.map(({ id, title, body, createdAt, archived }) => ({ id, title, body, createdAt, archived }));
 
     return this.notes
       .sort((a, b) => {

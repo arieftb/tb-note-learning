@@ -3,8 +3,10 @@
 
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../context/useTranslation';
 
 export const Navigation = ({ currentPath, onLogoutClick }) => {
+  const { translate } = useTranslation();
   const isActivePage = currentPath === '/';
   const isArchivedPage = currentPath === '/archived';
   const isDetailPage = currentPath.startsWith('/notes/');
@@ -15,14 +17,14 @@ export const Navigation = ({ currentPath, onLogoutClick }) => {
         {
           !isActivePage && (
             <li>
-              <Link to="/">Active</Link>
+              <Link to="/">{translate('home')}</Link>
             </li>
           )
         }
         {
           !isArchivedPage && (
             <li>
-              <Link to="/archived">Archived</Link>
+              <Link to="/archived">{translate('archived')}</Link>
             </li>
           )
         }
@@ -33,7 +35,7 @@ export const Navigation = ({ currentPath, onLogoutClick }) => {
                 onClick={onLogoutClick}
                 className="nav-link-button"
               >
-                Logout
+                {translate('logout')}
               </button>
             </li>
           )

@@ -503,3 +503,58 @@ button:disabled {
     width: 18px;
     height: 18px;
 }
+
+/* Language Toggle Button */
+.language-toggle {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-left: var(--spacing-md);
+    padding: 0;
+}
+
+.language-toggle:hover {
+    background-color: var(--color-border);
+    transform: rotate(15deg);
+}
+
+.dark-theme .language-toggle {
+    border-color: var(--color-border);
+    color: var(--color-text);
+}
+
+.dark-theme .language-toggle:hover {
+    background-color: var(--color-border);
+}
+
+/* Language icon styles */
+.language-toggle.id-icon {
+    background-color: #f8f9fa;
+    color: #343a40;
+    border-color: #dee2e6;
+}
+
+.language-toggle.id-icon:hover {
+    background-color: #e9ecef;
+    transform: rotate(15deg);
+}
+
+.language-toggle.en-icon {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-color: #495057;
+}
+
+.language-toggle.en-icon:hover {
+    background-color: #212529;
+    transform: rotate(15deg);
+}

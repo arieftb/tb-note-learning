@@ -3,6 +3,7 @@ import { NoteList } from '../organisms/NoteList';
 import { LoadingIndicator } from '../atoms/LoadingIndicator';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../context/useTranslation';
 
 export const ArchivedNotesLayout = ({
   archivedNotes,
@@ -11,6 +12,7 @@ export const ArchivedNotesLayout = ({
   onToggleUnArchive,
   isLoading = false,
 }) => {
+  const { translate } = useTranslation();
   return (
     <div className="container">
       <section className="mb-4">
@@ -18,7 +20,7 @@ export const ArchivedNotesLayout = ({
       </section>
 
       <section className="mb-5">
-        <h2 className="mb-3">Archived Notes</h2>
+        <h2 className="mb-3">{translate('archivedNotes')}</h2>
         <div className="notes-grid">
           {isLoading ? (
             <LoadingIndicator size="medium"/>
@@ -26,7 +28,7 @@ export const ArchivedNotesLayout = ({
             <NoteList
               notes={archivedNotes}
               onToggleArchive={onToggleUnArchive}
-              emptyMessage="Tidak ada catatan terarsip"
+              emptyMessage={translate('noArchivedNotes')}
             />
           )}
         </div>
