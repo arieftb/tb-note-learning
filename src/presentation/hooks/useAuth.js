@@ -17,7 +17,6 @@ export function useAuth () {
   useEffect(() => {
     setIsLoading(true);
     getLoginStatusUseCase.execute().then((result) => {
-      console.log('Authentication status:', result);
       setIsAuthenticated(result);
       setIsLoading(false);
     }).catch((error) => {

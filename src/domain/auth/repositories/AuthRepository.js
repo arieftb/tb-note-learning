@@ -1,4 +1,4 @@
-import { login, register } from '../../../data/auth/infrastructure/AuthRemoteService.js';
+import { fetchUser, login, register } from '../../../data/auth/infrastructure/AuthRemoteService.js';
 import { getToken, removeToken, saveToken } from '../../../data/auth/persistence/AuthLocalService.js';
 
 export class AuthRepository {
@@ -32,5 +32,15 @@ export class AuthRepository {
 
   async logout () {
     return removeToken();
+  }
+
+  async fetchUser (token) {
+    const response = await fetchUser(token);
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    return await response.data;
   }
 }
