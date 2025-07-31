@@ -1,8 +1,9 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { FormGroup } from '../molecules/FormGroup';
 import { Button } from '../atoms/Button';
 import { ErrorMessage } from '../atoms/ErrorMessage';
+import { useTranslation } from '../../context/useTranslation';
 
 export const RegisterForm = ({
   name,
@@ -18,20 +19,21 @@ export const RegisterForm = ({
   generalError,
   className = 'register-form'
 }) => {
+  const { translate } = useTranslation();
   return (
     <div className={className}>
       <ErrorMessage message={generalError}/>
       <form onSubmit={onSubmit}>
         <FormGroup
           id="name"
-          label="Name"
+          label={translate('name')}
           value={name}
           onChange={onNameChange}
           required
         />
         <FormGroup
           id="email"
-          label="Email"
+          label={translate('email')}
           type="email"
           value={email}
           onChange={onEmailChange}
@@ -39,36 +41,36 @@ export const RegisterForm = ({
         />
         <FormGroup
           id="password"
-          label="Password"
+          label={translate('password')}
           type="password"
           value={password}
           onChange={onPasswordChange}
           required
           minLength={6}
         >
-          <small>Password must be at least 6 characters long</small>
+          <small>{translate('passwordRequirements')}</small>
         </FormGroup>
         <FormGroup
           id="passwordConfirmation"
-          label="Confirm Password"
+          label={translate('confirmPassword')}
           type="password"
           value={passwordConfirmation}
           onChange={onPasswordConfirmationChange}
           required
           minLength={6}
         >
-          <small>Please confirm your password</small>
+          <small>{translate('confirmPasswordHelp')}</small>
         </FormGroup>
         <Button
           type="submit"
           className="register-button"
           disabled={isLoading}
         >
-          {isLoading ? 'Registering...' : 'Register'}
+          {isLoading ? translate('registering') : translate('register')}
         </Button>
       </form>
       <p className="login-link">
-        Already have an account? <a href="/login">Login</a>
+        {translate('alreadyHaveAccount')} <Link to="/login">{translate('login')}</Link>
       </p>
     </div>
   );

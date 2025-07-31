@@ -1,9 +1,18 @@
 export class SubmitUnArchiveNoteUseCase {
-  constructor (noteRepository) {
+  constructor (noteRepository, authRepository) {
     this.noteRepository = noteRepository;
+    this.authRepository = authRepository;
   }
 
-  execute (id) {
-    return this.noteRepository.unarchiveNote(id) != null;
+  async execute (id) {
+    const isLoggedIn = await this.authRepository.getAuthStatus();
+
+    if (!isLoggedIn) {
+      throw new Error('NOT_LOGGED_IN');
+    }
+
+    const token = await this.authRepository.getToken();
+
+    return await this.noteRepository.unarchiveNote(id, token);
   }
 }

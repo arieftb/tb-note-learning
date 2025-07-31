@@ -1,10 +1,9 @@
-export class DeleteNoteUseCase {
-  constructor (noteRepository, authRepository) {
-    this.noteRepository = noteRepository;
+export class GetUserUseCase {
+  constructor (authRepository) {
     this.authRepository = authRepository;
   }
 
-  async execute (id) {
+  async execute () {
     const isLoggedIn = await this.authRepository.getAuthStatus();
 
     if (!isLoggedIn) {
@@ -13,6 +12,6 @@ export class DeleteNoteUseCase {
 
     const token = await this.authRepository.getToken();
 
-    return this.noteRepository.deleteNote(id, token);
+    return this.authRepository.fetchUser(token);
   }
 }

@@ -3,7 +3,7 @@ export class GetLoginStatusUseCase {
     this.authRepository = authRepository;
   }
 
-  execute () {
-    return this.authRepository.getAuthStatus();
+  async execute () {
+    return await this.authRepository.getAuthStatus();
   }
 }

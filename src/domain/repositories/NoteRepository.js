@@ -1,97 +1,115 @@
-import { getInitialData } from '../../data/source/NoteSource.js';
+import {
+  addNote,
+  archiveNote,
+  deleteNote,
+  fetchArchivedCollection,
+  fetchById,
+  fetchCollection,
+  unarchiveNote
+} from '../../data/note/infrastructure/NoteRemoteService.js';
 
 export class NoteRepository {
   constructor () {
-    this.notes = getInitialData();
+    this.notes = [];
   }
 
-  addNote (title, body) {
-    const randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-    const date = new Date();
-    const timeStamp = date.getTime();
+  async addNote (title, body, token) {
+    const response = await addNote({
+        title,
+        body,
+      },
+      token);
 
-    const newNote = {
-      id: `${randomString}-${timeStamp}`,
-      title: title,
-      body: body,
-      archived: false,
-      createdAt: date.toISOString(),
-    };
-    this.notes.push(newNote);
-
-    return newNote;
-  }
-
-  deleteNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      return this.notes.splice(index, 1)[0];
+    if (response.error) {
+      throw new Error(response.error);
     }
-    return null;
+
+    return await response.data;
   }
 
-  archiveNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      const [noteToArchive] = this.notes.splice(index, 1);
-      noteToArchive.archived = true;
-      this.notes.push(noteToArchive);
-      return noteToArchive;
-    }
-    return null;
-  }
+  async deleteNote (id, token) {
+    const response = await deleteNote(id, token);
 
-  unarchiveNote (id) {
-    const index = this.notes.findIndex(note => note.id === id);
-    if (index !== -1) {
-      const [noteToUnarchive] = this.notes.splice(index, 1);
-      noteToUnarchive.archived = false;
-      this.notes.push(noteToUnarchive);
-      return noteToUnarchive;
+    if (response.error) {
+      throw new Error(response.error);
     }
 
     return null;
   }
 
-  getNotes () {
+  async archiveNote (id, token) {
+    const response = await archiveNote(id, token);
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    return true;
+  }
+
+  async unarchiveNote (id, token) {
+    const response = await unarchiveNote(id, token);
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    return true;
+  }
+
+  async getNotes (token) {
+    const response = await fetchCollection(token);
+
+    if (response.error) {
+      throw new Error(response.error);
+    }
+
+    const data = await response.data;
+
+    this.notes = data.map(({ id, title, body, createdAt, archived }) => ({ id, title, body, createdAt, archived }));
+
     return this.notes
-      .filter(note => !note.archived)
       .sort((a, b) => {
-        const dateA = new Date(a.createdAt).getTime();
-        const dateB = new Date(b.createdAt).getTime();
-
-        if (dateA !== dateB) {
-          return dateB - dateA;
-        }
-
-        return a.title.localeCompare(b.title);
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        return dateDiff !== 0 ? dateDiff : a.title.localeCompare(b.title);
       });
   }
 
-  getArchivedNotes () {
-    return this.notes.filter(note => note.archived).sort((a, b) => {
-      const dateA = new Date(a.createdAt).getTime();
-      const dateB = new Date(b.createdAt).getTime();
+  async getArchivedNotes (token) {
+    const response = await fetchArchivedCollection(token);
 
-      if (dateA !== dateB) {
-        return dateB - dateA;
-      }
+    if (response.error) {
+      throw new Error(response.error);
+    }
 
-      return a.title.localeCompare(b.title);
-    });
+    const data = await response.data;
+
+    this.notes = data.map(({ id, title, body, createdAt, archived }) => ({ id, title, body, createdAt, archived }));
+
+    return this.notes
+      .sort((a, b) => {
+        const dateDiff = new Date(b.createdAt) - new Date(a.createdAt);
+        return dateDiff !== 0 ? dateDiff : a.title.localeCompare(b.title);
+      });
   }
 
-  searchNotes (query) {
-    return this.getNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
+  async searchNotes (query, token) {
+    await this.getNotes(token);
+    return this.notes.filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
-  searchArchivedNotes (query) {
-    return this.getArchivedNotes().filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
+  async searchArchivedNotes (query, token) {
+    await this.getArchivedNotes(token);
+    return this.notes.filter(note => note.title.toLowerCase().includes(query.toLowerCase()));
   }
 
-  getNoteById (id) {
-    return this.notes.find(note => {
-      return note.id === id;
-    }) || null;
+  async getNoteById (id, token) {
+    const note = await fetchById(id, token);
+
+    if (note.error) {
+      throw new Error(note.error);
+    }
+
+    return await note.data;
   }
 }

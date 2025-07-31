@@ -1,17 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { ArchivedNotesLayout } from '../templates/ArchivedNotesTemplate';
 import { GetArchiveNotesUseCase } from '../../domain/usecases/GetArchiveNotesUseCase.js';
 import { SubmitUnArchiveNoteUseCase } from '../../domain/usecases/SubmitUnArchiveNoteUseCase.js';
 import { SearchArchiveNoteUseCase } from '../../domain/usecases/SearchArchiveNoteUseCase.js';
 import noteRepository from '../../domain/repositories/NoteRepositoryInstance';
+import authRepository from '../../domain/auth/repositories/AuthRepositoryInstance';
+import { useTranslation } from '../../context/useTranslation';
 
-const getArchiveNotesUseCase = new GetArchiveNotesUseCase(noteRepository);
-const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository);
-const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository);
+const getArchiveNotesUseCase = new GetArchiveNotesUseCase(noteRepository, authRepository);
+const submitUnArchiveNoteUseCase = new SubmitUnArchiveNoteUseCase(noteRepository, authRepository);
+const searchArchivedNotesUseCase = new SearchArchiveNoteUseCase(noteRepository, authRepository);
 
 export const ArchivedNotesPage = () => {
+  const navigate = useNavigate();
+  const { translate } = useTranslation();
   const [archivedNotes, setArchivedNotes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('keyword') || '';
 
@@ -20,19 +25,47 @@ export const ArchivedNotesPage = () => {
   }, [searchQuery]);
 
   const loadArchivedNotes = (keyword) => {
+    setIsLoading(true);
+
     if (keyword) {
-      const archivedNotes = searchArchivedNotesUseCase.execute(keyword);
-      setArchivedNotes(archivedNotes);
+      searchArchivedNotesUseCase.execute(keyword).then((notes) => {
+        setArchivedNotes(notes);
+        setIsLoading(false);
+      }).catch((error) => {
+        console.error(`${translate('failedLoadArchivedNotes')}:`, error);
+        if (error.message === 'NOT_LOGGED_IN') {
+          navigate('/login', { replace: true });
+        }
+        setArchivedNotes([]);
+        setIsLoading(false);
+      });
       return;
     }
 
-    const archivedNotes = getArchiveNotesUseCase.execute();
-    setArchivedNotes(archivedNotes);
+    getArchiveNotesUseCase.execute().then((notes) => {
+      console.log(notes);
+      setArchivedNotes(notes);
+      setIsLoading(false);
+    }).catch((error) => {
+      console.log(`${translate('failedLoadArchivedNotes')}:`, error);
+      setArchivedNotes([]);
+      setIsLoading(false);
+
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   const handleToggleUnArchive = (id) => {
-    submitUnArchiveNoteUseCase.execute(id);
-    loadArchivedNotes(searchQuery);
+    submitUnArchiveNoteUseCase.execute(id).then(() => {
+      loadArchivedNotes(searchQuery);
+    }).catch((error) => {
+      console.error(`${translate('failedUnarchiveNote')}:`, error);
+      if (error.message === 'NOT_LOGGED_IN') {
+        navigate('/login', { replace: true });
+      }
+    });
   };
 
   const handleSearchChange = (keyword) => {
@@ -49,6 +82,7 @@ export const ArchivedNotesPage = () => {
       searchQuery={searchQuery}
       onSearchChange={handleSearchChange}
       onToggleUnArchive={handleToggleUnArchive}
+      isLoading={isLoading}
     />
   );
 };

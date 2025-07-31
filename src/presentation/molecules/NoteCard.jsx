@@ -1,8 +1,10 @@
 import { Button } from '../atoms/Button';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from '../../context/useTranslation';
 
 export const NoteCard = ({ note, onToggleArchive }) => {
+  const { translate } = useTranslation();
   return (
     <div className="note-card slide-in">
       <Link to={`/notes/${note.id}`} className="note-title-link">
@@ -17,7 +19,9 @@ export const NoteCard = ({ note, onToggleArchive }) => {
           <Button
             onClick={() => onToggleArchive(note.id)}
           >
-            {note.archived ? 'Aktifkan' : 'Arsipkan'}
+            {
+              note.archived ? translate('active') : translate('archive')
+            }
           </Button>
         </div>
       </div>

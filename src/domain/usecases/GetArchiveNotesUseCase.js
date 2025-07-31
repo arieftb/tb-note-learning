@@ -1,9 +1,18 @@
 export class GetArchiveNotesUseCase {
-  constructor (noteRepository) {
+  constructor (noteRepository, authRepository) {
     this.noteRepository = noteRepository;
+    this.authRepository = authRepository;
   }
 
-  execute () {
-    return this.noteRepository.getArchivedNotes();
+  async execute () {
+    const isLoggedIn = await this.authRepository.getAuthStatus();
+
+    if (!isLoggedIn) {
+      throw new Error('NOT_LOGGED_IN');
+    }
+
+    const token = await this.authRepository.getToken();
+
+    return await this.noteRepository.getArchivedNotes(token);
   }
 }

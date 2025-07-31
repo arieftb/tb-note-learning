@@ -36,4 +36,21 @@ async function login ({ email, password }) {
   return { error: false, data: { accessToken: responseJson.data.accessToken } };
 }
 
-export { register, login };
+async function fetchUser (token) {
+  const response = await fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return { error: true, data: null };
+  }
+
+  return { error: false, data: responseJson.data };
+}
+
+export { register, login, fetchUser };
